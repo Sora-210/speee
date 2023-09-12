@@ -56,7 +56,7 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
-	"onCreateCommand": "bash -c 'rvm install 3.2.2' && bash -i -c 'cd /workspaces/hr-eng-internship-2023-2st-team-union/rails && bundle install'",
+	"onCreateCommand": "bash -c 'rvm install 3.2.2' && bash -i -c 'cd /workspaces/hr-eng-internship-2023-2nd-team-union/rails && bundle install'",
 
 	// "oryx build" will automatically install your dependencies and attempt to build your project
 	"postCreateCommand": "oryx build -p virtualenv_name=.venv --log-file /tmp/oryx-build.log --manifest-dir /tmp || echo 'Could not auto-build. Skipping.'"
