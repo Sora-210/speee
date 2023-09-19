@@ -13,7 +13,7 @@ class CreateBranches < ActiveRecord::Migration[7.0]
       t.string :business_hours_text, comment: '営業時間 <ex: 平日9:00-18:00>'
       t.string :holidays, comment: '<ex: 水曜日、祝日>'
       t.string :catchcopy, null: false
-      t.string :introduction, null: false
+      t.text :introduction, null: false
       t.timestamps
     end
   end

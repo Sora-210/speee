@@ -33,7 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_082752) do
     t.string "business_hours_text", comment: "営業時間 <ex: 平日9:00-18:00>"
     t.string "holidays", comment: "<ex: 水曜日、祝日>"
     t.string "catchcopy", null: false
-    t.string "introduction", null: false
+    t.text "introduction", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cities_id"], name: "index_branches_on_cities_id"
