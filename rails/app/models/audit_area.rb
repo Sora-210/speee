@@ -1,0 +1,2 @@
+class AuditArea < ApplicationRecord
+end
