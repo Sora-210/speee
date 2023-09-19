@@ -1,4 +1,4 @@
 class Branch < ApplicationRecord
     belongs_to :company
-    has_many :audit_areas
+    has_many :assesment_areas
 end
