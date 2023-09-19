@@ -14,6 +14,7 @@ class CreateBranches < ActiveRecord::Migration[7.0]
       t.string :holidays, comment: '<ex: 水曜日、祝日>'
       t.string :catchcopy, null: false
       t.string :introduction, null: false
+      t.timestamps
     end
   end
 end

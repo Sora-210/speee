@@ -4,6 +4,7 @@ class CreateCities < ActiveRecord::Migration[7.0]
       t.references :prefectures, forgin_key: true
       t.string :name, null: false
       t.string :yomi, null: false
+      t.timestamps
     end
   end
 end

@@ -14,42 +14,52 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_082752) do
   create_table "assesment_areas", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "branches_id"
     t.bigint "cities_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["branches_id"], name: "index_assesment_areas_on_branches_id"
     t.index ["cities_id"], name: "index_assesment_areas_on_cities_id"
   end
 
   create_table "branches", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "companies_id"
+    t.bigint "prefectures_id"
+    t.bigint "cities_id"
     t.string "name", null: false
     t.string "logo_url", null: false
     t.string "post_code", null: false
-    t.bigint "prefectures_id"
-    t.bigint "cities_id"
     t.string "address", null: false
     t.string "phone"
     t.string "fax"
-    t.string "business_hours"
-    t.string "holidays"
+    t.string "business_hours_text", comment: "営業時間 <ex: 平日9:00-18:00>"
+    t.string "holidays", comment: "<ex: 水曜日、祝日>"
     t.string "catchcopy", null: false
     t.string "introduction", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["cities_id"], name: "index_branches_on_cities_id"
     t.index ["companies_id"], name: "index_branches_on_companies_id"
     t.index ["prefectures_id"], name: "index_branches_on_prefectures_id"
   end
 
   create_table "cities", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "prefectures_id"
     t.string "name", null: false
     t.string "yomi", null: false
-    t.bigint "prefectures_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["prefectures_id"], name: "index_cities_on_prefectures_id"
   end
 
   create_table "companies", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "prefectures", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
