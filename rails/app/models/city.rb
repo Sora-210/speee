@@ -1,4 +1,4 @@
 class City < ApplicationRecord
     belongs_to :prefecture
-    has_many :audit_areas
+    has_many :assesment_areas
 end
