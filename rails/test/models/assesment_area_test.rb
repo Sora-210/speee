@@ -1,6 +1,6 @@
 require "test_helper"
 
-class AuditAreaTest < ActiveSupport::TestCase
+class AssesmentAreaTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
