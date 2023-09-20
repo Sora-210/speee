@@ -6,7 +6,7 @@
   <% prefecture_name = review.prefecture.name %>
   <% city_name = review.city.name %>
 
-  <h2><%= review.title %></h2>
+  <h2 ><%= review.title %></h2>
   <p>売却した不動産会社名: <%= company.name %></p>
   <p>住所: <%= prefecture_name %><%= city_name %></p>
   <p>売却の理由:<%= display_sale_reason(review.sale_reason_type) %></p>
