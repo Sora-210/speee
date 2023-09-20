@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_19_083036) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_044732) do
   create_table "assesment_areas", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "branch_id"
     t.bigint "city_id"
@@ -18,6 +18,30 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_083036) do
     t.datetime "updated_at", null: false
     t.index ["branch_id"], name: "index_assesment_areas_on_branch_id"
     t.index ["city_id"], name: "index_assesment_areas_on_city_id"
+  end
+
+  create_table "assesments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "branch_id"
+    t.bigint "prefecture_id"
+    t.bigint "city_id"
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "last_name_kana", null: false
+    t.string "first_name_kana", null: false
+    t.string "tel", null: false
+    t.string "email", null: false
+    t.string "address", null: false
+    t.integer "building_type", null: false
+    t.integer "exclusive_area", null: false
+    t.integer "land_area", null: false
+    t.integer "building_area", null: false
+    t.integer "room_plan_type", null: false
+    t.integer "constructed_year", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["branch_id"], name: "index_assesments_on_branch_id"
+    t.index ["city_id"], name: "index_assesments_on_city_id"
+    t.index ["prefecture_id"], name: "index_assesments_on_prefecture_id"
   end
 
   create_table "branches", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
