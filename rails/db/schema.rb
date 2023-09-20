@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_19_082752) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_19_083036) do
   create_table "assesment_areas", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "branch_id"
     t.bigint "city_id"
@@ -60,6 +60,45 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_082752) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "branch_id"
+    t.bigint "prefecture_id"
+    t.bigint "city_id"
+    t.string "name", null: false
+    t.integer "gender", null: false
+    t.integer "age", null: false
+    t.string "address", null: false
+    t.integer "building_type", null: false
+    t.integer "times_type", null: false
+    t.date "consider_season", null: false
+    t.date "assesment_season", null: false
+    t.date "po_season", null: false
+    t.date "sale_season", null: false
+    t.date "delivery_season", null: false
+    t.integer "speed_cs", null: false
+    t.integer "assesment_price", null: false
+    t.integer "sale_price", null: false
+    t.boolean "is_price_down", default: false, null: false
+    t.integer "price_down_month"
+    t.integer "price_down_amount"
+    t.integer "close_price", null: false
+    t.integer "price_cs", null: false
+    t.integer "contract_type", null: false
+    t.string "title", null: false
+    t.integer "sale_reason_type", null: false
+    t.string "anxiety", null: false
+    t.string "decision_reason", null: false
+    t.integer "support_cs", null: false
+    t.string "support_reason", null: false
+    t.string "advice", null: false
+    t.string "request", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["branch_id"], name: "index_reviews_on_branch_id"
+    t.index ["city_id"], name: "index_reviews_on_city_id"
+    t.index ["prefecture_id"], name: "index_reviews_on_prefecture_id"
   end
 
 end
