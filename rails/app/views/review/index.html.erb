@@ -1,0 +1,36 @@
+<h2>ベテランすまい</h2>
+
+<% @reviews.each do |review| %>
+  <% branch = review.branch %>
+  <% company = branch.company %>
+  <% prefecture_name = review.prefecture.name %>
+  <% city_name = review.city.name %>
+
+  <h2><%= review.title %></h2>
+  <p>売却した不動産会社名: <%= company.name %></p>
+  <p>住所: <%= prefecture_name %><%= city_name %></p>
+  <p>売却の理由:<%= display_sale_reason(review.sale_reason_type) %></p>
+  <% case review.times_type %>
+<% when "first" %>
+  <p>売却経験:今回の売却が初めて</p>
+<% when "second" %>
+  <p>売却経験:今回の売却が2回目。</p>
+<% when "many" %>
+  <p>売却経験:3回以上</p>
+<% end %>
+
+  <%= render 'review_section', title: '売却時に不安だったこと', content: review.anxiety %>
+  <%= render 'review_section', title: 'この会社に決めた決め手', content: review.decision_reason %>
+  <%= render 'review_section', title: '不動産会社の対応満足度', content: "★#{review.support_cs} - #{review.support_reason}" %>
+  <%= render 'review_section', title: '今後売却する人へのアドバイス', content: review.advice %>
+  <%= render 'review_section', title: '不動産会社に改善してほしい点', content: review.request %>
+
+  <h4><%= company.name %>について</h4>
+  <p>企業名: <%= company.name %></p>
+  <p>郵便番号: <%= branch.post_code %></p>
+  <p>住所: <%= prefecture_name %><%= city_name %><%= branch.address %></p>
+  <p>電話番号: <%= branch.tel %></p>
+  <p>FAX: <%= branch.fax %></p>
+  <p>営業時間: <%= branch.business_hours_text %></p>
+  <p>定休日: <%= branch.holidays_text %></p>
+<% end %>
