@@ -8,11 +8,13 @@ namespace :master_import do
 
         begin
             csv = Rails.root.join(args.path.blank? ? 'prefecture.csv' : args.path)
-
             ActiveRecord::Base.transaction do
                 CSV.foreach(csv, headers: true) do |data|
+
+                    raise SyntaxError if data['id'].to_i == 0
+
                     Prefecture.create({
-                        id: data['id'],
+                        id: data['id'].to_i,
                         name: data['name']
                     })
                 end
@@ -27,6 +29,9 @@ namespace :master_import do
         rescue TypeError
             Rails.logger.error '[ERROR]'
             Rails.logger.error '定義に一致するCSVファイルが見つかりません'
+        rescue SyntaxError
+            Rails.logger.error '[ERROR]'
+            Rails.logger.error 'IDは整数を指定してください'
         rescue => err
             Rails.logger.error '挿入中に未知のエラーが発生しました'
             Rails.logger.error err
@@ -41,9 +46,11 @@ namespace :master_import do
 
         begin
             csv = Rails.root.join(args.path.blank? ? 'city.csv' : args.path)
-
             ActiveRecord::Base.transaction do
                 CSV.foreach(csv, headers: true) do |data|
+
+                    raise SyntaxError if data['id'].to_i == 0
+
                     City.create({
                         id: data['id'],
                         prefecture_id: data['prefecture_id'],
@@ -55,6 +62,7 @@ namespace :master_import do
 
             after_count = City.count
             puts "City: #{after_count - before_count}件 挿入しました"
+            raise "挿入件数が0件です" if (after_count - before_count) == 0
         rescue ActiveRecord::RecordNotUnique
             Rails.logger.error '[ERROR]'
             Rails.logger.error 'IDが重複しています'
@@ -62,6 +70,9 @@ namespace :master_import do
         rescue TypeError
             Rails.logger.error '[ERROR]'
             Rails.logger.error '定義に一致するCSVファイルが見つかりません'
+        rescue SyntaxError
+            Rails.logger.error '[ERROR]'
+            Rails.logger.error 'IDは整数を指定してください'
         rescue => err
             Rails.logger.error '挿入中に未知のエラーが発生しました'
             Rails.logger.error err
@@ -80,9 +91,10 @@ namespace :master_import do
         begin
             csv = Rails.root.join(args.path.blank? ? 'company.csv' : args.path)
 
-            CSV.foreach(csv, headers: true) do |data|
-                # puts data
-                ActiveRecord::Base.transaction do
+            ActiveRecord::Base.transaction do
+                CSV.foreach(csv, headers: true) do |data|
+                    raise SyntaxError if data['company_id'].to_i == 0 || data['branch_id'].to_i == 0
+
                     # Company
                     company = Company.find_or_create_by(id: data['company_id']) do |company|
                         company.name = data['name']
@@ -94,7 +106,7 @@ namespace :master_import do
 
                     # Branch
                     branch = company.branches.create({
-                        name: data['branch_name'].blank? ? '' : data['branch_name'],
+                        name: data['branch_name'],
                         logo_url: data['logo_url'],
                         post_code: data['post_code'],
                         prefecture_id: prefecture.id,
@@ -124,6 +136,7 @@ namespace :master_import do
             puts "Company: #{after_company_count - before_company_count}件 挿入しました"
             puts "Branch: #{after_branch_count - before_branch_count}件 挿入しました"
             puts "AssesmentArea: #{after_assesment_area_count - before_assesment_area_count}件 挿入しました"
+            raise "挿入件数が0件です" if (after_assesment_area_count - before_assesment_area_count) == 0
         rescue ActiveRecord::RecordNotUnique
             Rails.logger.error '[ERROR]'
             Rails.logger.error 'IDが重複しています'
@@ -131,6 +144,9 @@ namespace :master_import do
         rescue TypeError
             Rails.logger.error '[ERROR]'
             Rails.logger.error '定義に一致するCSVファイルが見つかりません'
+        rescue SyntaxError
+            Rails.logger.error '[ERROR]'
+            Rails.logger.error 'IDは整数を指定してください'
         rescue => err
             Rails.logger.error '挿入中に未知のエラーが発生しました'
             Rails.logger.error err
