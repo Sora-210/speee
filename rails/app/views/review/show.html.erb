@@ -1,6 +1,7 @@
 <h4 class="fw-bold mt-4 mx-3">ベテランすまい</h3>
+
   <% branch = @review.branch %>
-  <% company = branch.company %>
+  <% company = @review.branch.company %>
   <% prefecture_name = @review.prefecture.name %>
   <% city_name = @review.city.name %>
 
@@ -33,43 +34,43 @@
         <tbody>
             <tr>
                 <td>売却検討</td>
-                <td class="diagonal-strike"><%= @review.consider_season.strftime("%Y年%-m月")%></td>
+                <td class="diagonal-strike"><%= format_japanese_date(@review.consider_season)%></td>
                 <td class="diagonal-strike">-</td>
             </tr>
             <tr>
                 <td>査定依頼時期/価格</td>
-                <td><%= @review.assesment_season.strftime("%Y年%-m月")%></td>
+                <td><%=format_japanese_date(@review.assesment_season)%></td>
                 <td><%= @review.assesment_price%>万円</td>
             </tr>
             <tr>
                 <td>売出時期/価格</td>
-                <td><%= @review.po_season.strftime("%Y年%-m月")%></td>
+                <td><%= format_japanese_date(@review.po_season)%></td>
                 <td><%= @review.assesment_price%>万円</td>
             </tr>
             <tr>
                 <td>売却時期/価格</td>
-                <td><%= @review.sale_season.strftime("%Y年%-m月")%></td>
+                <td><%= format_japanese_date(@review.sale_season)%></td>
                 <td><%= @review.sale_price%>万円</td>
             </tr>
             <tr>
                 <td>引き渡し時期</td>
-                <td><%= @review.delivery_season.strftime("%Y年%-m月")%></td>
+                <td><%=format_japanese_date(@review.delivery_season)%></td>
                 <td>-</td>
             </tr>
         </tbody>
     </table>
 </div>
 
-  <div class=" mt-5">
+<div class=" mt-5">
   <h5 class=""><%= company.name %>について</h5>
   <p class="mb-0 ">企業名: <%= company.name %></p>
-  <p class="mb-0 ">郵便番号: <%= branch.post_code %></p>
-  <p class="mb-0 ">住所: <%= prefecture_name %><%= city_name %><%= branch.address %></p>
-  <p class="mb-0 ">電話番号: <%= branch.tel %></p>
-  <p class="mb-0 ">FAX: <%= branch.fax %></p>
-  <p class="mb-0 ">営業時間: <%= branch.business_hours_text %></p>
-  <p class="mb-0 ">定休日: <%= branch.holidays_text %></p>
-  </div>
+  <p class="mb-0 ">郵便番号: <%= @review.branch.post_code %></p>
+  <p class="mb-0 ">住所: <%= prefecture_name %><%= city_name %><%= @review.branch.address %></p>
+  <p class="mb-0 ">電話番号: <%= @review.branch.tel %></p>
+  <p class="mb-0 ">FAX: <%= @review.branch.fax %></p>
+  <p class="mb-0 ">営業時間: <%= @review.branch.business_hours_text %></p>
+  <p class="mb-0 ">定休日: <%= @review.branch.holidays_text %></p>
+</div>
   </div>
   <div class="d-flex justify-content-center align-items-center mt-5 mb-5">
   <button class="btn btn-primary  custom-button">査定依頼をする</button>
