@@ -153,4 +153,80 @@ namespace :master_import do
             Rails.logger.error err.class
         end
     end
+
+    desc '口コミマスターのインポート'
+    task :reviews, ['path'] => :environment do |_task, args|
+        puts 'Reviews Master Importing...'
+
+        before_count = Review.count
+
+        # enum mapping
+        gender = { '男性' => 0, '女性' => 1, 'その他・不明' => 2 }
+        building_type = { 'マンション' => 0, '戸建て' => 1, '土地' => 2 }
+        times_type = { '初めて' => 0, '2回目' => 1, '3回以上' => 2 }
+        
+        begin
+            csv = Rails.root.join(args.path.blank? ? 'review.csv' : args.path)
+
+            ActiveRecord::Base.transaction do
+                CSV.foreach(csv, headers: true) do |data|
+                    # 店舗取得
+                    branch = Branch.find(data['branch_id'])
+                    # 住所取得
+                    prefecture = Prefecture.find_by(name: data['prefecture'])
+                    city = City.find_by(name: data['city'])
+
+                    puts 
+                    # Review
+                    review = branch.reviews.create({
+                        prefecture_id: prefecture.id,
+                        city_id: city.id,
+                        name: data['name'],
+                        gender: gender[data['gender']],
+                        age: data['age'],
+                        address: data['address'],
+                        building_type: building_type[data['building_type']],
+                        times_type: times_type[data['times']],
+                        consider_season: data['consider_season'],
+                        assesment_season: data['assesment_season'],
+                        po_season: data['po_season'],
+                        sale_season: data['sale_season'],
+                        delivery_season: data['delivery_season'],
+                        speed_cs: data['speed_cs'],
+                        assesment_price: data['assesment_price'],
+                        sale_price: data['sale_price'],
+                        is_price_down: data['is_price_down'],
+                        price_down_month: data['price_down_month'],
+                        price_down_amount: data['price_down_amount'],
+                        close_price: data['close_price'],
+                        price_cs: data['price_cs'],
+                        contract_type: (data['contract_type'].to_i - 1),
+                        title: data['title'],
+                        sale_reason_type: data['sale_reason_type'].to_i == 99 ? data['sale_reason_type'].to_i  : data['sale_reason_type'].to_i - 1,
+                        anxiety: data['anxiety'],
+                        decision_reason: data['decision_reason'],
+                        support_cs: data['support_cs'],
+                        support_reason: data['support_reason'],
+                        advice: data['advice'],
+                        request: data['request']
+                    })
+                end
+            end
+
+            after_count = Review.count
+
+            puts "Review: #{after_count - before_count}件 挿入しました"
+            raise "挿入件数が0件です" if (after_count - before_count) == 0
+        rescue ActiveRecord::RecordNotUnique
+            Rails.logger.error '[ERROR]'
+            Rails.logger.error 'IDが重複しています'
+        rescue TypeError
+            Rails.logger.error '[ERROR]'
+            Rails.logger.error '定義に一致するCSVファイルが見つかりません'
+        rescue => err
+            Rails.logger.error '挿入中に未知のエラーが発生しました'
+            Rails.logger.error err
+            Rails.logger.error err.class
+        end
+    end
 end
