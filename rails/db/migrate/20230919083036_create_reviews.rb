@@ -31,12 +31,12 @@ class CreateReviews < ActiveRecord::Migration[7.0]
       t.string :title, null: false
       # enum
       t.integer :sale_reason_type, null: false
-      t.string :anxiety, null: false
-      t.string :decision_reason, null: false
+      t.text :anxiety, null: false
+      t.text :decision_reason, null: false
       t.integer :support_cs, null: false
       t.string :support_reason, null: false
-      t.string :advice, null: false
-      t.string :request, null: false
+      t.text :advice, null: false
+      t.text :request, null: false
 
       t.timestamps
     end
