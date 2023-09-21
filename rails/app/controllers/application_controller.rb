@@ -1,4 +1,13 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+    rescue_from ActiveRecord::RecordNotFound,   with: :_render_404
+    private
+    def _render_404(e = nil)
+      if request.format.to_sym == :json
+        render json: { error: "404 Not Found" }, status: :not_found
+      else
+        render "/errors/404", status: :not_found, layout: "error"
+      end
+    end
 end
