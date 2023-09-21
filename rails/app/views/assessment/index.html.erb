@@ -1,0 +1,76 @@
+<%= tag.meta name: 'robots', content: 'noindex' %>
+<% content_for :title, "査定依頼フォーム【べてらん住まい】" %>
+<% content_for :description, "特定の地域の不動産業者の検索結果を表示しています。" %>
+<div class="container" style="margin:20px 0 0 0;">
+    <h1>査定依頼フォーム</h1>
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                <h2>不動産情報フォーム</h2>
+                <%= form_with url: "/test", method: :post, local: true, html: { class: 'needs-validation', novalidate: '' } do |form| %>
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :name, '名前:' %>
+                    <%= form.text_field :name, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :furigana, 'フリガナ:' %>
+                    <%= form.text_field :furigana, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :phone, '電話番号:' %>
+                    <%= form.telephone_field :phone, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :email, 'メールアドレス:' %>
+                    <%= form.email_field :email, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :address, '住所:' %>
+                    <%= form.text_field :address, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :building_type, '建物のタイプ:' %>
+                    <%= form.select :building_type, ['分譲マンション', '一戸建て', '土地'], {}, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :exclusive_area, '専有面積:' %>
+                    <%= form.number_field :exclusive_area, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :land_area, '土地面積:' %>
+                    <%= form.number_field :land_area, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :building_area, '建物面積:' %>
+                    <%= form.number_field :building_area, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :layout, '間取り:' %>
+                    <%= form.select :layout, [
+                        '1R', '1K/1DK', '1LK/1LDK', '2K/2DK', '2LK/2LDK', '3K/3DK', '3LK/3LDK',
+                        '4K/4DK', '4LK/4LDK', '5K/5DK', '5LK/5LDK', '6K/6DK', '6LK/6LDK', 'over'
+                    ], {}, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :age, '築年数:' %>
+                    <%= form.number_field :age, class: 'form-control' %>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                    <%= form.submit '送信', class: 'btn btn-primary' %>
+                    </div>
+                <% end %>
+                </div>
+            </div>
+        </div>
+</div>
