@@ -2,7 +2,7 @@ require 'csv'
 
 namespace :master_import do
     desc '都道府県マスターのインポート'
-    task :prefectures, ['path'] => :environment do |task, args|
+    task :prefectures, ['path'] => :environment do |_task, args|
         puts 'Prefectures Master Importing...'
         before_count = Prefecture.count
 
@@ -19,31 +19,31 @@ namespace :master_import do
             end
 
             after_count = Prefecture.count
-            puts 'Prefecture: #{after_count - before_count}件 挿入しました'
+            puts "Prefecture: #{after_count - before_count}件 挿入しました"
         rescue ActiveRecord::RecordNotUnique
-            puts '[ERROR]'
-            puts 'IDが重複しています'
-            puts 'イエウールと共通のIDのためTABLEを作り直して挿入してください'
+            Rails.logger.error '[ERROR]'
+            Rails.logger.error 'IDが重複しています'
+            Rails.logger.error 'イエウールと共通のIDのためTABLEを作り直して挿入してください'
         rescue TypeError
-            puts '[ERROR]'
-            puts '定義に一致するCSVファイルが見つかりません'
+            Rails.logger.error '[ERROR]'
+            Rails.logger.error '定義に一致するCSVファイルが見つかりません'
         rescue => err
-            puts '挿入中に未知のエラーが発生しました'
-            puts err
-            puts err.class
+            Rails.logger.error '挿入中に未知のエラーが発生しました'
+            Rails.logger.error err
+            Rails.logger.error err.class
         end
     end
     
     desc '市区町村マスターのインポート'
-    task :cities, ['path'] => :environment do |task, args|
+    task :cities, ['path'] => :environment do |_task, args|
         puts 'Cities Master Importing...'
         before_count = City.count
 
         begin
             csv = Rails.root.join(args.path.blank? ? 'city.csv' : args.path)
 
-            CSV.foreach(csv, headers: true) do |data|
-                ActiveRecord::Base.transaction do
+            ActiveRecord::Base.transaction do
+                CSV.foreach(csv, headers: true) do |data|
                     City.create({
                         id: data['id'],
                         prefecture_id: data['prefecture_id'],
@@ -54,23 +54,23 @@ namespace :master_import do
             end
 
             after_count = City.count
-            puts 'City: #{after_count - before_count}件 挿入しました'
+            puts "City: #{after_count - before_count}件 挿入しました"
         rescue ActiveRecord::RecordNotUnique
-            puts '[ERROR]'
-            puts 'IDが重複しています'
-            puts 'イエウールと共通のIDのためTABLEを作り直して挿入してください'
+            Rails.logger.error '[ERROR]'
+            Rails.logger.error 'IDが重複しています'
+            Rails.logger.error 'イエウールと共通のIDのためTABLEを作り直して挿入してください'
         rescue TypeError
-            puts '[ERROR]'
-            puts '定義に一致するCSVファイルが見つかりません'
+            Rails.logger.error '[ERROR]'
+            Rails.logger.error '定義に一致するCSVファイルが見つかりません'
         rescue => err
-            puts '挿入中に未知のエラーが発生しました'
-            puts err
-            puts err.class
+            Rails.logger.error '挿入中に未知のエラーが発生しました'
+            Rails.logger.error err
+            Rails.logger.error err.class
         end
     end
     
     desc '企業マスターのインポート'
-    task :companies, ['path'] => :environment do |task, args|
+    task :companies, ['path'] => :environment do |_task, args|
         puts 'Companies/branches/Assesment_Areas Master Importing...'
 
         before_company_count = Company.count
@@ -121,20 +121,20 @@ namespace :master_import do
             after_branch_count = Branch.count
             after_assesment_area_count = AssesmentArea.count
 
-            puts 'Company: #{after_company_count - before_company_count}件 挿入しました'
-            puts 'Branch: #{after_branch_count - before_branch_count}件 挿入しました'
-            puts 'AssesmentArea: #{after_assesment_area_count - before_assesment_area_count}件 挿入しました'
+            puts "Company: #{after_company_count - before_company_count}件 挿入しました"
+            puts "Branch: #{after_branch_count - before_branch_count}件 挿入しました"
+            puts "AssesmentArea: #{after_assesment_area_count - before_assesment_area_count}件 挿入しました"
         rescue ActiveRecord::RecordNotUnique
-            puts '[ERROR]'
-            puts 'IDが重複しています'
-            puts 'イエウールと共通のIDのためTABLEを作り直して挿入してください'
+            Rails.logger.error '[ERROR]'
+            Rails.logger.error 'IDが重複しています'
+            Rails.logger.error 'イエウールと共通のIDのためTABLEを作り直して挿入してください'
         rescue TypeError
-            puts '[ERROR]'
-            puts '定義に一致するCSVファイルが見つかりません'
+            Rails.logger.error '[ERROR]'
+            Rails.logger.error '定義に一致するCSVファイルが見つかりません'
         rescue => err
-            puts '挿入中に未知のエラーが発生しました'
-            puts err
-            puts err.class
+            Rails.logger.error '挿入中に未知のエラーが発生しました'
+            Rails.logger.error err
+            Rails.logger.error err.class
         end
     end
 end
