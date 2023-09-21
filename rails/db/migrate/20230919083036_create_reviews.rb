@@ -36,7 +36,7 @@ class CreateReviews < ActiveRecord::Migration[7.0]
       t.integer :support_cs, null: false
       t.string :support_reason, null: false
       t.text :advice, null: false
-      t.text :request, null: false
+      t.text :request
 
       t.timestamps
     end

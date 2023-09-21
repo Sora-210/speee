@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_044732) do
     t.bigint "company_id"
     t.bigint "prefecture_id"
     t.bigint "city_id"
-    t.string "name", null: false
+    t.string "name"
     t.string "logo_url", null: false
     t.string "post_code", null: false
     t.string "address", null: false
@@ -117,7 +117,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_044732) do
     t.integer "support_cs", null: false
     t.string "support_reason", null: false
     t.text "advice", null: false
-    t.text "request", null: false
+    t.text "request"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["branch_id"], name: "index_reviews_on_branch_id"

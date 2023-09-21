@@ -4,7 +4,7 @@ class CreateBranches < ActiveRecord::Migration[7.0]
       t.references :company, forgin_key: true
       t.references :prefecture, forgin_key: true
       t.references :city, forgin_key: false
-      t.string :name, null: false
+      t.string :name
       t.string :logo_url, null: false
       t.string :post_code, null: false
       t.string :address, null: false
