@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                 <h2>不動産情報フォーム</h2>
-                <%= form_with url: "/test", method: :post, local: true, html: { class: 'needs-validation', novalidate: '' } do |form| %>
+                <%= form_with model:@asses,local: true, html: { class: 'needs-validation', novalidate: '' } do |form| %>
                     <div class="form-group" style="margin-top: 20px;">
                     <%= form.label :name, '名前:' %>
                     <%= form.text_field :name, class: 'form-control' %>
@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="form-group" style="margin-top: 20px;">
-                    <%= form.label :phone, '電話番号:' %>
+                    <%= form.label :phone, '電話番号(ハイフンあり):' %>
                     <%= form.telephone_field :phone, class: 'form-control' %>
                     </div>
 
@@ -39,17 +39,17 @@
                     </div>
 
                     <div class="form-group" style="margin-top: 20px;">
-                    <%= form.label :exclusive_area, '専有面積:' %>
+                    <%= form.label :exclusive_area, '専有面積(平方メートル):' %>
                     <%= form.number_field :exclusive_area, class: 'form-control' %>
                     </div>
 
                     <div class="form-group" style="margin-top: 20px;">
-                    <%= form.label :land_area, '土地面積:' %>
+                    <%= form.label :land_area, '土地面積(平方メートル):' %>
                     <%= form.number_field :land_area, class: 'form-control' %>
                     </div>
 
                     <div class="form-group" style="margin-top: 20px;">
-                    <%= form.label :building_area, '建物面積:' %>
+                    <%= form.label :building_area, '建物面積(平方メートル):' %>
                     <%= form.number_field :building_area, class: 'form-control' %>
                     </div>
 
