@@ -1,6 +1,6 @@
 class PrefecturesController < ApplicationController
-    def index
-        @prefecture = Prefecture.where(name: params[:name]).first
+    def show
+        @prefecture = Prefecture.where(name: params[:id]).first
         if !@prefecture.present?
             return 
         end
