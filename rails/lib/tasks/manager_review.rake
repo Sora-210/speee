@@ -6,8 +6,6 @@ namespace :manager_review do
         puts "######################"
         puts "[manager_review help]"
         puts "manager_review:add['fileName']        売却体験談の追加(重複の確認なし)"
-        puts "manager_review:generate               更新用テンプレートの出力"
-        puts "manager_review:update['fileName']     売却体験談の更新(各項目更新/公開設定)"
         puts "manager_review:public['reviewId']     売却体験談の公開"
         puts "manager_review:private['reviewId']    売却体験談の非公開"
         puts "######################"
@@ -95,6 +93,54 @@ namespace :manager_review do
                 Rails.logger.error '定義に一致するCSVファイルが見つかりません'
             rescue => err
                 Rails.logger.error '挿入中に未知のエラーが発生しました'
+                Rails.logger.error err
+                Rails.logger.error err.class
+            end
+        end
+    end
+
+    desc '売却体験談の公開'
+    task :public, ['review_id'] => :environment do |_task, args|
+        puts "# 売却体験談の公開"
+        puts "#######################"
+        if args.review_id.blank?
+            puts '体験談IDを指定してください'
+            puts 'rake manager_review:public["review_id"]'
+        else
+            begin
+                ActiveRecord::Base.transaction do
+                    review = Review.find(args.review_id)
+                    review.update(is_public: true)
+                end
+            rescue ActiveRecord::RecordNotFound
+                Rails.logger.error '[ERROR]'
+                Rails.logger.error '対象体験談が見つかりません'
+            rescue => err
+                Rails.logger.error '変更中に未知のエラーが発生しました'
+                Rails.logger.error err
+                Rails.logger.error err.class
+            end
+        end
+    end
+
+    desc '売却体験談の非公開'
+    task :private, ['review_id'] => :environment do |_task, args|
+        puts "# 売却体験談の非公開"
+        puts "#######################"
+        if args.review_id.blank?
+            puts '体験談IDを指定してください'
+            puts 'rake manager_review:private["review_id"]'
+        else
+            begin
+                ActiveRecord::Base.transaction do
+                    review = Review.find(args.review_id)
+                    review.update(is_public: false)
+                end
+            rescue ActiveRecord::RecordNotFound
+                Rails.logger.error '[ERROR]'
+                Rails.logger.error '対象体験談が見つかりません'
+            rescue => err
+                Rails.logger.error '変更中に未知のエラーが発生しました'
                 Rails.logger.error err
                 Rails.logger.error err.class
             end
