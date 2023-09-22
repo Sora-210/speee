@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   mount KomachiHeartbeat::Engine => '/ops'
-  get 'company/:branch_id', to: 'companies#show', as: 'company'
+  resources :companies, only: [:show], param: :branch_id
   root 'homes#index'
   resources :reviews, only: [:show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
