@@ -2,13 +2,18 @@
 <h2 class='text-center'><%= @company.name %> <%= @branch.name %></h2>
 
 <div class="custom-space">
+<div class="d-flex">
+<div class="custom-margin">
 <p class="mt-2 mb-1"><%= @branch.catchcopy %></p>
 <p><%= @branch.introduction %></p>
+</div>
+<img src="<%=@branch.logo_url%>"/>
+</div>
 
  <div class="mt-5 d-flex">
-
-
-
+ <div>
+ <p></p>
+ </div>
   <div>
   <h5 class="font-bold"><%= @company.name %>について</h5>
   <p class="mb-0 ">企業名: <%= @company.name %></p>
@@ -29,7 +34,7 @@
         <div class="card-body">
           <p class="card-title"><strong><%= review.title %>: ★<%= review.support_cs %></strong></p>
           <p class="card-text"><%= review.support_reason %></p>
-          <p class="card-text text-end">成約価格<%= review.close_price %>万円（<%= @branch.prefecture.name %><%= @branch.city.name %>: <%= review.po_season.strftime("%Y年%-m月") %> ）</p>
+          <p class="card-text text-end">成約価格<%= number_with_delimiter(review.close_price / 10000) %>万円（<%= @branch.prefecture.name %><%= @branch.city.name %>: <%= review.po_season.strftime("%Y年%-m月") %> ）</p>
         </div>
       </div>
     </div>
@@ -49,5 +54,9 @@
         margin-left:15%;
         margin-top:5%;
          }
+
+    .custom-margin {
+    margin-right:15%;
+    }
 </style>
 
