@@ -3,6 +3,7 @@ class PrefecturesController < ApplicationController
         @prefecture = Prefecture.where(name: params[:name]).first
         if !@prefecture.present?
             return 
+        end
             @branches = Branch.where(prefecture_id: @prefecture.id)
             @cities = City.where(prefecture_id: @prefecture.id)
             @branch_reviews = []
