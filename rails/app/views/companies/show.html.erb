@@ -10,10 +10,24 @@
 <img src="<%=@branch.logo_url%>"/>
 </div>
 
- <div class="mt-5 d-flex">
- <div>
- <p></p>
- </div>
+ <div class="mt-5 d-flex ">
+<table class="table table-sm custom-table custom-margin">
+  <tbody>
+    <tr>
+      <td>対応満足度</td>
+      <td><span class="value-cell"><%=rounded_avg(@support_cs_avg)%></span>/5.0</td>
+    </tr>
+    <tr>
+      <td>売却スピード</td>
+      <td><span class="value-cell"><%=rounded_avg(@speed_cs_avg)%></span>/5.0</td>
+    </tr>
+    <tr>
+      <td>売却価格</td>
+      <td><span class="value-cell"><%=rounded_avg(@price_cs_avg)%></span>/5.0</td>
+    </tr>
+  </tbody>
+</table>
+
   <div>
   <h5 class="font-bold"><%= @company.name %>について</h5>
   <p class="mb-0 ">企業名: <%= @company.name %></p>
@@ -25,7 +39,7 @@
   <p class="mb-0 ">定休日: <%= @branch.holidays_text %></p>
   </div>
  </div>
-  <p class="mt-5"><strong><%= @company.name %>で売却したひとの不動産会社についての口コミ（平均評価★3.5)</strong></p>
+  <p class="mt-5"><strong><%= @company.name %>で売却したひとの不動産会社についての口コミ（平均評価★<%=rounded_avg(@overall_avg)%>)</strong></p>
 
  <div class="row">
   <% @branch.reviews.each do |review| %>
@@ -58,5 +72,16 @@
     .custom-margin {
     margin-right:15%;
     }
+.custom-table {
+    width: 350px;  /* テーブルの横幅を300pxに設定 */
+  }
+  .custom-table th, .custom-table td {
+    padding: 0.25rem !important;  /* セルのパディングを調整 */
+    margin: 0 !important;        /* セルのマージンを調整 */
+  }
+  .value-cell {
+    font-size: 1.5rem; /* フォントサイズを大きくする */
+    font-weight: bold; /* 太字にする */
+  }
 </style>
 
