@@ -6,6 +6,7 @@ namespace :manager_review do
         puts "######################"
         puts "[manager_review help]"
         puts "manager_review:add['fileName']        売却体験談の追加(重複の確認なし)"
+        puts "manager_review:show['reviewId']     売却体験談の確認"
         puts "manager_review:public['reviewId']     売却体験談の公開"
         puts "manager_review:private['reviewId']    売却体験談の非公開"
         puts "######################"
@@ -100,6 +101,27 @@ namespace :manager_review do
         Rails.logger.error err.class
     end
 
+    desc '売却体験談の確認'
+    task :show, ['review_id'] => :environment do |_task, args|
+        puts "# 売却体験談の確認"
+        puts "#######################"
+
+        if args.review_id.blank?
+            puts '体験談IDを指定してください'
+            puts 'rake manager_review:public["review_id"]'
+            exit
+        end
+        
+        pp Review.find(args.review_id).attributes
+
+    rescue ActiveRecord::RecordNotFound
+        Rails.logger.error '[ERROR]'
+        Rails.logger.error '対象体験談が見つかりません'
+    rescue => err
+        Rails.logger.error '変更中に未知のエラーが発生しました'
+        Rails.logger.error err
+        Rails.logger.error err.class
+    end
 
     desc '売却体験談の公開'
     task :public, ['review_id'] => :environment do |_task, args|
