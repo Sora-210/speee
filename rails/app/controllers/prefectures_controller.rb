@@ -1,6 +1,6 @@
 class PrefecturesController < ApplicationController
     def show
-        @prefecture = Prefecture.where(name: params[:id]).first
+        @prefecture = Prefecture.find_by(name: params[:id])
         if !@prefecture.present?
             return 
         end
