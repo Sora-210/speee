@@ -2,10 +2,28 @@ class AssesController < ApplicationController
     def index
     end
     def create
+      @branch = Branch.find(params[:branch_id])
+      if @branch.nil?
+        puts "branch not found"
+        return
+      end
       if !validiate_phone(params)
+        @branch.errors.add(:phone, "invalid phone number")
         puts "invalid phone number"
+        render :index
       elsif !validiate_email(params)
+        @branch.errors.add(:email, "invalid email")
         puts "invalid email"
+        render :index
+      elsif
+        puts "valid!"
+        @asses = Assesment.new(:city_id => @branch.city_id ,:prefecture_id => @branch.prefecture_id ,:branch_id => @branch.id, :last_name => params[:last_name], :first_name => params[:first_name], :last_name_kana => params[:last_name_kana], :first_name_kana => params[:first_name_kana], :tel => params[:phone], :email => params[:email], :address => params[:address], :building_type => params[:building_type].to_i, :exclusive_area => params[:exclusive_area].to_i, :land_area => params[:land_area].to_i, :building_area => params[:building_area].to_i, :room_plan_type => params[:room_plan_type].to_i, :constructed_year => params[:constructed_year].to_i)
+        if @asses.save
+          puts "saved"
+        else
+          puts "not saved"
+          puts @asses.errors.full_messages
+        end
       end
     end
     private

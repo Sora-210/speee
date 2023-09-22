@@ -7,15 +7,28 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                 <h2>不動産情報フォーム</h2>
-                <%= form_with model:@asses,local: true, html: { class: 'needs-validation', novalidate: '' } do |form| %>
+                <% if @asses&.errors&.any?%>
+                    <div class="alert alert-danger">
+                    <ul>
+                        <% @asses.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                        <% end %>
+                    </ul>
+                    </div>
+                <% end %>
+                <%= form_with url:request.url, model:@asses,local: true, html: { class: 'needs-validation', novalidate: '' } do |form| %>
                     <div class="form-group" style="margin-top: 20px;">
-                    <%= form.label :name, '名前:' %>
-                    <%= form.text_field :name, class: 'form-control' %>
+                    <%= form.label :last_name, '苗字:' %>
+                    <%= form.text_field :last_name, class: 'form-control' %>
+                    <%= form.label :first_name, '名前:' %>
+                    <%= form.text_field :first_name, class: 'form-control' %>
                     </div>
 
                     <div class="form-group" style="margin-top: 20px;">
-                    <%= form.label :furigana, 'フリガナ:' %>
-                    <%= form.text_field :furigana, class: 'form-control' %>
+                    <%= form.label :last_name_kana, 'カナ:' %>
+                    <%= form.text_field :last_name_kana, class: 'form-control' %>
+                    <%= form.label :first_name_kana, 'カナ:' %>
+                    <%= form.text_field :first_name_kana, class: 'form-control' %>
                     </div>
 
                     <div class="form-group" style="margin-top: 20px;">
@@ -35,7 +48,7 @@
 
                     <div class="form-group" style="margin-top: 20px;">
                     <%= form.label :building_type, '建物のタイプ:' %>
-                    <%= form.select :building_type, ['分譲マンション', '一戸建て', '土地'], {}, class: 'form-control' %>
+                    <%= form.select :building_type, [['分譲マンション',0], ['一戸建て', 1], ['土地', 2]], {}, class: 'form-control' %>
                     </div>
 
                     <div class="form-group" style="margin-top: 20px;">
@@ -56,8 +69,8 @@
                     <div class="form-group" style="margin-top: 20px;">
                     <%= form.label :layout, '間取り:' %>
                     <%= form.select :layout, [
-                        '1R', '1K/1DK', '1LK/1LDK', '2K/2DK', '2LK/2LDK', '3K/3DK', '3LK/3LDK',
-                        '4K/4DK', '4LK/4LDK', '5K/5DK', '5LK/5LDK', '6K/6DK', '6LK/6LDK', 'over'
+                        ['1R', 0], ['1K/1DK', 1], ['1LK/1LDK', 2], ['2K/2DK', 3], ['2LK/2LDK', 4], ['3K/3DK', 5], ['3LK/3LDK', 6],
+                        ['4K/4DK', 7], ['4LK/4LDK', 8], ['5K/5DK', 9], ['5LK/5LDK', 10], ['6K/6DK', 11], ['6LK/6LDK', 12], ['over', 13]
                     ], {}, class: 'form-control' %>
                     </div>
 
