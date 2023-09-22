@@ -176,7 +176,6 @@ namespace :master_import do
                     prefecture = Prefecture.find_by(name: data['prefecture'])
                     city = City.find_by(name: data['city'])
 
-                    puts 
                     # Review
                     review = branch.reviews.create({
                         prefecture_id: prefecture.id,
