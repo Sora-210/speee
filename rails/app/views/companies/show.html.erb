@@ -48,7 +48,7 @@
         <div class="card-body">
           <p class="card-title"><strong><%= review.title %>: ★<%= review.support_cs %></strong></p>
           <p class="card-text"><%= review.support_reason %></p>
-          <p class="card-text text-end">成約価格<%= number_with_delimiter(review.close_price / 10000) %>万円（<%= @branch.prefecture.name %><%= @branch.city.name %>: <%= review.po_season.strftime("%Y年%-m月") %> ）</p>
+          <p class="card-text text-end">成約価格<%= format_close_price(review.close_price) %>万円（<%= @branch.prefecture.name %><%= @branch.city.name %>: <%= review.po_season.strftime("%Y年%-m月") %> ）</p>
         </div>
       </div>
     </div>
