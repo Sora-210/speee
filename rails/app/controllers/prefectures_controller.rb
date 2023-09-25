@@ -10,7 +10,7 @@ class PrefecturesController < ApplicationController
             @average_score = []
             @branches.each do |branch|
                 @target_reviews = Review.where(branch_id: branch.id)
-                @average_score = (@target_reviews.average(:speed_cs) + @target_reviews.average(:price_cs) + @target_reviews.average(:support_cs)) / 3
+                @average_score = branch.all_average_score
                 @branch_reviews.push(@target_reviews)
             end
     end
