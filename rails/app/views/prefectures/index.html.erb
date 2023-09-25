@@ -1,0 +1,25 @@
+<%# app/views/prefectures/index.html.erb %>
+<% content_for :title, "不動産検索結果表示" %>
+<% content_for :description, "特定の地域の不動産業者の検索結果を表示しています。" %>
+<div class="container-fluid" style="margin: 20px 0 20px 10px;">
+  <h1><%= @prefecture.name%>の不動産会社</h1>
+</div>
+<ul style="list-style: none;">
+<% @branches.each_with_index do |branch, i| %>
+<% if @branch_reviews[i][0].decision_reason? %>
+    <li>
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <%= image_tag branch.logo_url, class:"card-img-top", alt:"不動産業者のロゴ"%>
+        <h2 class="card-title"><%= branch.name %></h2>
+        <h3 class="card-subtitle">★<%=@average_score%></h3>
+        <p class="card-text">営業時間：<%= branch.business_hours_text%></p>
+        <p class="card-text">定休日：<%= branch.holidays_text%></p>
+        <p class="card-text">住所：<%= branch.address %></p>
+          <p class="card-text">会社の決め手：<%= @branch_reviews[i][0].decision_reason %></p>
+        </div>
+      </div>
+    </li>
+    <%end%>
+  <% end %> 
+</ul>
