@@ -7,7 +7,7 @@
 <p class="mt-2 mb-1"><%= @branch.catchcopy %></p>
 <p><%= @branch.introduction %></p>
 </div>
-<img src="<%=@branch.logo_url%>"/>
+<img src="<%=@branch.logo_url%>" alt="<%= @branch.name %> ロゴ"/>
 </div>
 
  <div class="mt-5 d-flex ">
@@ -15,15 +15,15 @@
   <tbody>
     <tr>
       <td>対応満足度</td>
-      <td><span class="value-cell"><%=rounded_avg(@support_cs_avg)%></span>/5.0</td>
+      <td><span class="value-cell"><%=two_decimal_avg(@support_cs_avg)%></span>/5.0</td>
     </tr>
     <tr>
       <td>売却スピード</td>
-      <td><span class="value-cell"><%=rounded_avg(@speed_cs_avg)%></span>/5.0</td>
+      <td><span class="value-cell"><%=two_decimal_avg(@speed_cs_avg)%></span>/5.0</td>
     </tr>
     <tr>
       <td>売却価格</td>
-      <td><span class="value-cell"><%=rounded_avg(@price_cs_avg)%></span>/5.0</td>
+      <td><span class="value-cell"><%=two_decimal_avg(@price_cs_avg)%></span>/5.0</td>
     </tr>
   </tbody>
 </table>
@@ -39,7 +39,7 @@
   <p class="mb-0 ">定休日: <%= @branch.holidays_text %></p>
   </div>
  </div>
-  <p class="mt-5"><strong><%= @company.name %>で売却したひとの不動産会社についての口コミ（平均評価★<%=rounded_avg(@overall_avg)%>)</strong></p>
+  <p class="mt-5"><strong><%= @company.name %>で売却したひとの不動産会社についての口コミ（平均評価★<%=two_decimal_avg(@overall_avg)%>)</strong></p>
 
  <div class="row">
   <% @branch.reviews.each do |review| %>
@@ -48,7 +48,7 @@
         <div class="card-body">
           <p class="card-title"><strong><%= review.title %>: ★<%= review.support_cs %></strong></p>
           <p class="card-text"><%= review.support_reason %></p>
-          <p class="card-text text-end">成約価格<%= format_close_price(review.close_price) %>万円（<%= @branch.prefecture.name %><%= @branch.city.name %>: <%= review.po_season.strftime("%Y年%-m月") %> ）</p>
+          <p class="card-text text-end">成約価格<%= price_in_millions_with_delimiter(review.close_price) %>万円（<%= @branch.prefecture.name %><%= @branch.city.name %>: <%= review.po_season.strftime("%Y年%-m月") %> ）</p>
         </div>
       </div>
     </div>
