@@ -1,6 +1,6 @@
 class BranchesController < ApplicationController
   def show
-    @branch = Branch.eager_load(:prefecture, :city, :reviews).find(params[:branch_id])
+    @branch = Branch.eager_load(:prefecture, :city, :reviews).find(params[:id])
     @company = @branch.company
     averages = Review.where(branch_id: @branch.id).pluck(Arel.sql('AVG(speed_cs), AVG(price_cs), AVG(support_cs)')).first
     @speed_cs_avg = averages[0]
