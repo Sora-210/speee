@@ -23,6 +23,6 @@ module Rail
 
     # logger
     config.logger = Logger.new(STDOUT)
-    config.log_level = :debug
+    config.log_level = :error
   end
 end
