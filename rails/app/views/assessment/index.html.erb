@@ -7,16 +7,16 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                 <h2>不動産情報フォーム</h2>
-                <% if @asses&.errors&.any?%>
+                <% if @assessment&.errors&.any?%>
                     <div class="alert alert-danger">
                     <ul>
-                        <% @asses.errors.full_messages.each do |message| %>
+                        <% @assessment.errors.full_messages.each do |message| %>
                         <li><%= message %></li>
                         <% end %>
                     </ul>
                     </div>
                 <% end %>
-                <%= form_with url:request.url, model:@asses,local: true, html: { class: 'needs-validation', novalidate: '' } do |form| %>
+                <%= form_with url:request.url, model:@assessment,local: true, html: { class: 'needs-validation', novalidate: '' } do |form| %>
                     <div class="form-group" style="margin-top: 20px;">
                     <%= form.label :last_name, '苗字:' %>
                     <%= form.text_field :last_name, class: 'form-control' %>
