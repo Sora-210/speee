@@ -1,4 +1,6 @@
 <% breadcrumb :review, @review %>
+<% content_for(:keywords, "不動産会社,#{@review.branch.company.name},#{@review.branch.name.blank? ? "" : "#{@review.branch.name}," }口コミ,評判") %>
+
 <h4 class="fw-bold mt-4 mx-3">ベテランすまい</h3>
 
   <% branch = @review.branch %>
