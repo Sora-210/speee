@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Rail</title>
+    <title><%= content_for?(:title) ? yield(:title) : "べてらん住まい" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "べてらん住まいは信頼出来る体験談を基に不動産業者を選べるサービスです。" %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
