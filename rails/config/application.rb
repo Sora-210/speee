@@ -22,7 +22,7 @@ module Rail
     # config.eager_load_paths << Rails.root.join("extras")
 
     # logger
-    # config.logger = Logger.new(STDOUT)
-    # config.log_level = :error
+    config.logger = Logger.new(STDOUT)
+    config.log_level = :error
   end
 end

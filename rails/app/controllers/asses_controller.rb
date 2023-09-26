@@ -7,16 +7,13 @@ class AssesController < ApplicationController
     def create
       @branch = Branch.find(params[:branch_id])
       if @branch.nil?
-        puts "branch not found"
         return
       end
       if !validiate_phone(params)
         @branch.errors.add(:phone, "invalid phone number")
-        puts "invalid phone number"
         render :index
       elsif !validiate_email(params)
         @branch.errors.add(:email, "invalid email")
-        puts "invalid email"
         render :index
       elsif
          # TODO:ストロングパラメーターにリファクタリングを行う
