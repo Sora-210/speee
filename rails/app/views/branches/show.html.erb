@@ -1,4 +1,5 @@
 <% breadcrumb :branch, @branch %>
+<% content_for(:title, "#{@branch.company.name}#{@branch.name}の不動産売却の評判は?") %>
 <% content_for(:description, "#{@branch.company.name}#{@branch.name}で実際に不動産売却や不動産購入をした人の口コミや評判を掲載しています！") %>
 <% content_for(:keywords, "不動産会社,#{@branch.company.name},#{@branch.name.blank? ? "" : "#{@branch.name}," }口コミ,評判") %>
 
@@ -7,7 +8,6 @@
     <h4 class="fw-bold mx-3 navbar-brand">ベテランすまい</h4>
   </div>
 </nav>
-
 <h2 class='text-center'><%= @company.name %> <%= @branch.name %></h2>
 
 <div class="custom-space">

@@ -7,4 +7,3 @@ module ReviewHelper
     date.strftime("%Y年%-m月")
   end
 end
-  
