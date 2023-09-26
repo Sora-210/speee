@@ -6,9 +6,7 @@ class AssesController < ApplicationController
     end
     def create
       @branch = Branch.find(params[:branch_id])
-      if @branch.nil?
-        return
-      end
+      return if @branch.nil?
       if !validiate_phone(params)
         @branch.errors.add(:phone, "invalid phone number")
         render :index

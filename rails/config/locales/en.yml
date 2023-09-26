@@ -42,21 +42,3 @@ en:
           money: "金銭的な理由"
           other: "その他"
 
-  enums:
-    assessment:
-      layout:
-         r1: '1R'
-         k1: '1K/1DK'
-         lk1: '1LK/1LDK'
-         k2: '2K/2DK'
-         lk2: '2LK/2LDK'
-         k3: '3K/3DK'
-         lk3: '3LK/3LDK'
-         k4: '4K/4DK'
-         lk4: '4LK/4LDK'
-         k5: '5K/5DK'
-         lk5: '5LK/5LDK'
-         k6: '6K/6DK'
-         lk6: '6LK/6LDK'
-         over: '7K/7DK以上'
-
