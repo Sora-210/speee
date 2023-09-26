@@ -1,5 +1,6 @@
-<h4 class="fw-bold mt-4 mx-3">ベテランすまい</h3>
+<% content_for(:title, prefix_title_review(@review)) %>
 
+<h4 class="fw-bold mt-4 mx-3">ベテランすまい</h3>
   <% branch = @review.branch %>
   <% company = @review.branch.company %>
   <% prefecture_name = @review.prefecture.name %>
