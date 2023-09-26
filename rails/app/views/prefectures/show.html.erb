@@ -9,7 +9,7 @@
     <li>
       <div class="card" style="width: 18rem;margin:15px 20px 0 0">
       <%# Todo linkをbranch_pathに置き換える %>
-        <%= link_to "/companies/#{branch.id}" do %>
+        <%= link_to branch_path(branch.id) do %>
           <div class="card-body">
               <%= image_tag branch.logo_url, class:"card-img-top", alt:"不動産業者のロゴ"%>
               <h2 class="card-title"><%= branch.name %></h2>
