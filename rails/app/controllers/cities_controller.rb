@@ -12,12 +12,12 @@ class CitiesController < ApplicationController
         render template: 'errors/404', status: 404, layout: 'error', content_type: 'text/html'
         return 
     end
-    @prefecture_branch_ids = Branch.where(prefecture_id: @prefecture.id).pluck(:id)
-    @city_branch_ids = Branch.where(city_id: @city.id).pluck(:id)
-    @common_ids = @prefecture_branch_ids & @city_branch_ids
-    @prefecture_branch_ids_count = @prefecture_branch_ids.count
-    @common_ids_count = @common_ids.count
-    if @common_ids_count >= @prefecture_branch_ids_count * 0.8
+    prefecture_branch_ids = Branch.where(prefecture_id: @prefecture.id).pluck(:id)
+    city_branch_ids = Branch.where(city_id: @city.id).pluck(:id)
+    duplicate_ids = prefecture_branch_ids & city_branch_ids
+    prefecture_branch_ids_count = prefecture_branch_ids.count
+    duplicate_ids_count = duplicate_ids.count
+    if duplicate_ids_count >= prefecture_branch_ids_count * 0.8
       @is_no_index = true
     end
   end
