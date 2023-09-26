@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_044732) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_22_064910) do
   create_table "assesment_areas", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "branch_id"
     t.bigint "city_id"
@@ -120,6 +120,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_044732) do
     t.text "request"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_public", default: true, null: false
     t.index ["branch_id"], name: "index_reviews_on_branch_id"
     t.index ["city_id"], name: "index_reviews_on_city_id"
     t.index ["prefecture_id"], name: "index_reviews_on_prefecture_id"

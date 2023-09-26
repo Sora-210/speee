@@ -30,6 +30,18 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    attributes:
+      review:
+        sale_reasons:
+          moving_house: "住み替え"
+          inheritance: "相続"
+          transfer_job: "転勤、転職"
+          divorce: "離婚"
+          assets: "資産整理"
+          money: "金銭的な理由"
+          other: "その他"
+
   enums:
     assessment:
       layout:
