@@ -1,11 +1,12 @@
 require 'net/http'
 require 'uri'
 
-class AssesController < ApplicationController
+class AssessController < ApplicationController
     def index
     end
     def create
       @branch = Branch.find(params[:branch_id])
+      
       return if @branch.nil?
       if !validiate_phone(params)
         @branch.errors.add(:phone, "invalid phone number")
@@ -15,9 +16,9 @@ class AssesController < ApplicationController
         render :index
       elsif
          # TODO:ストロングパラメーターにリファクタリングを行う
-        @asses = Assesment.new(:city_id => @branch.city_id ,:prefecture_id => @branch.prefecture_id ,:branch_id => @branch.id, :last_name => params[:last_name], :first_name => params[:first_name], :last_name_kana => params[:last_name_kana], :first_name_kana => params[:first_name_kana], :tel => params[:phone], :email => params[:email], :address => params[:address], :building_type => params[:building_type].to_i, :exclusive_area => params[:exclusive_area].to_i, :land_area => params[:land_area].to_i, :building_area => params[:building_area].to_i, :room_plan_type => params[:room_plan_type].to_i, :constructed_year => params[:constructed_year].to_i)
-        if @asses.save
-          post_to_external_api_with_net_http(@asses)
+        @assess = Assesment.new(:city_id => @branch.city_id ,:prefecture_id => @branch.prefecture_id ,:branch_id => @branch.id, :last_name => params[:last_name], :first_name => params[:first_name], :last_name_kana => params[:last_name_kana], :first_name_kana => params[:first_name_kana], :tel => params[:phone], :email => params[:email], :address => params[:address], :building_type => params[:building_type].to_i, :exclusive_area => params[:exclusive_area].to_i, :land_area => params[:land_area].to_i, :building_area => params[:building_area].to_i, :room_plan_type => params[:room_plan_type].to_i, :constructed_year => params[:constructed_year].to_i)
+        if @assess.save
+          post_to_external_api_with_net_http(@assess)
         else
         end
       end
@@ -42,7 +43,7 @@ class AssesController < ApplicationController
     end
     private
 
-    def post_to_external_api_with_net_http(assesment)
+    def post_to_external_api_with_net_http(assessment)
       uri = URI.parse("https://miniul-api.herokuapp.com/affiliate/v2/conversions")
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
@@ -50,20 +51,20 @@ class AssesController < ApplicationController
       request = Net::HTTP::Post.new(uri.path, {'Content-Type' => 'application/json'})
 
       request_data = {
-          branch_id: assesment.branch_id,
-          property_city: assesment.city_id,
-          property_address: assesment.address,
-          property_type: assesment.building_type,
-          property_exclusive_area: assesment.exclusive_area,
-          property_land_area: assesment.land_area,
-          property_building_area: assesment.building_area,
+          branch_id: assessment.branch_id,
+          property_city: assessment.city_id,
+          property_address: assessment.address,
+          property_type: assessment.building_type,
+          property_exclusive_area: assessment.exclusive_area,
+          property_land_area: assessment.land_area,
+          property_building_area: assessment.building_area,
           url_param: "2",
-          property_room_plan: assesment.room_plan_type,
-          property_constructed_year: assesment.constructed_year,
-          user_email: assesment.email,
-          user_name: "#{assesment.last_name} #{assesment.first_name}",
-          user_name_kana: "#{assesment.last_name_kana} #{assesment.first_name_kana}",
-          user_tel: assesment.tel
+          property_room_plan: assessment.room_plan_type,
+          property_constructed_year: assessment.constructed_year,
+          user_email: assessment.email,
+          user_name: "#{assessment.last_name} #{assessment.first_name}",
+          user_name_kana: "#{assessment.last_name_kana} #{assessment.first_name_kana}",
+          user_tel: assessment.tel
       }
 
       request.body = request_data.to_json
