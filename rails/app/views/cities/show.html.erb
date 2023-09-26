@@ -1,5 +1,10 @@
 <% content_for :title, "不動産検索結果表示" %>
 <% content_for :description, "特定の地域の不動産業者の検索結果を表示しています。" %>
+<% if @is_no_index%>
+  <% content_for :no_index do %>
+    <meta name="robots" content="noindex">
+  <% end %>
+<%end%>
 <div class="container-fluid" style="margin: 20px 0 20px 10px;">
   <h1><%= @prefecture.name%>の<%= @city.name%>の不動産会社</h1>
 </div>
