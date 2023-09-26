@@ -1,3 +1,4 @@
+<% breadcrumb :review, @review %>
 <% content_for(:title, "（#{format_japanese_date(@review.created_at)}投稿）口コミ・評判 | #{@review.branch.company.name}#{@review.branch.name}") %>
 <% content_for(:keywords, "不動産会社,#{@review.branch.company.name},#{@review.branch.name.blank? ? "" : "#{@review.branch.name}," }口コミ,評判") %>
 
@@ -9,6 +10,9 @@
 
   <h2 class='text-center'><%= @review.title %></h2>
   <div class="custom-space">
+  <nav aria-label="パンくずリスト">
+    <%= breadcrumbs style: :bootstrap5 %>
+  </nav>
   <div class=" mt-5">
   <p class="lh-sm  mb-2">売却した不動産会社名: <%= company.name %></p>
   <p class="lh-sm  mb-2">住所: <%= prefecture_name %><%= city_name %></p>

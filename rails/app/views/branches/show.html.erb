@@ -1,3 +1,4 @@
+<% breadcrumb :branch, @branch %>
 <% content_for(:title, "#{@branch.company.name}#{@branch.name}の不動産売却の評判は?") %>
 <% content_for(:description, "#{@branch.company.name}#{@branch.name}で実際に不動産売却や不動産購入をした人の口コミや評判を掲載しています！") %>
 <% content_for(:keywords, "不動産会社,#{@branch.company.name},#{@branch.name.blank? ? "" : "#{@branch.name}," }口コミ,評判") %>
@@ -10,6 +11,9 @@
 <h2 class='text-center'><%= @company.name %> <%= @branch.name %></h2>
 
 <div class="custom-space">
+<nav aria-label="パンくずリスト">
+  <%= breadcrumbs style: :bootstrap5 %>
+</nav>
 <div class="d-flex">
 <div class="custom-margin">
 <p class="mt-2 mb-1"><%= @branch.catchcopy %></p>
