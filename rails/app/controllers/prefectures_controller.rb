@@ -5,6 +5,6 @@ class PrefecturesController < ApplicationController
             return 
         end
             @branches = Branch.where(prefecture_id: @prefecture.id)
-            @cities = City.where(prefecture_id: @prefecture.id)
+            @cities = @prefecture.cities
     end
 end
