@@ -6,7 +6,7 @@ class Branch < ApplicationRecord
     has_many :reviews
     has_many :assesments
     def all_average_score
-        total_score = (speed_average_score + price_average_score + support_cs_average_score) / 3
+        total_score = (speed_average_score + price_average_score + support_average_score) / 3
         total_score.round(1)
       end
       def speed_average_score
