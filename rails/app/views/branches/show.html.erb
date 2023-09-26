@@ -1,4 +1,9 @@
-<h4 class="fw-bold mt-4 mx-3">ベテランすまい</h4>
+<nav class="navbar navbar-light ">
+  <div class="container">
+    <h4 class="fw-bold mx-3 navbar-brand">ベテランすまい</h4>
+  </div>
+</nav>
+
 <h2 class='text-center'><%= @company.name %> <%= @branch.name %></h2>
 
 <div class="custom-space">
@@ -28,16 +33,21 @@
   </tbody>
 </table>
 
-  <div>
-  <h5 class="font-bold"><%= @company.name %>について</h5>
-  <p class="mb-0 ">企業名: <%= @company.name %></p>
-  <p class="mb-0 ">郵便番号: <%= @branch.post_code %></p>
-  <p class="mb-0 ">住所: <%= @branch.prefecture.name%><%= @branch.city.name%><%= @branch.address %></p>
-  <p class="mb-0 ">電話番号: <%= @branch.tel %></p>
-  <p class="mb-0 ">FAX: <%= @branch.fax %></p>
-  <p class="mb-0 ">営業時間: <%= @branch.business_hours_text %></p>
-  <p class="mb-0 ">定休日: <%= @branch.holidays_text %></p>
+ <div class="container">
+  <div class="row justify-content-center custom-center">
+    <div class="col-12 col-sm-8">
+      <h5 class="font-bold"><%= @company.name %>について</h5>
+      <p class="mb-0 ">企業名: <%= @company.name %></p>
+      <p class="mb-0 ">郵便番号: <%= @branch.post_code %></p>
+      <p class="mb-0 ">住所: <%= @branch.prefecture.name%><%= @branch.city.name%><%= @branch.address %></p>
+      <p class="mb-0 ">電話番号: <%= @branch.tel %></p>
+      <p class="mb-0 ">FAX: <%= @branch.fax %></p>
+      <p class="mb-0 ">営業時間: <%= @branch.business_hours_text %></p>
+      <p class="mb-0 ">定休日: <%= @branch.holidays_text %></p>
+    </div>
   </div>
+</div>
+
  </div>
   <p class="mt-5"><strong><%= @company.name %>で売却したひとの不動産会社についての口コミ（平均評価★<%=two_decimal_avg(@overall_avg)%>)</strong></p>
 
@@ -83,5 +93,45 @@
     font-size: 1.5rem; /* フォントサイズを大きくする */
     font-weight: bold; /* 太字にする */
   }
+
+  @media screen and (max-width: 768px) {
+    .custom-space {
+        margin-left: 5%;
+        margin-top: 2%;
+    }
+
+    .custom-margin {
+        margin-right: 5%;
+    }
+
+    .custom-button {
+        font-size: 12px;
+        padding: 8px 24px;
+    }
+
+    h2.text-center {
+        font-size: 1.5rem;  /* h2タグのサイズを調整 */
+    }
+
+    .d-flex {
+        flex-direction: column;  /* 縦方向にスタック */
+    }
+
+    .custom-table {
+        width: 100%;  /* テーブルの幅を最大化 */
+    }
+
+    .col-8 {
+        width: 100%;
+        max-width: 100%;
+        flex-basis: 100%;  /* ブロックをフル幅に設定 */
+    }
+
+    img {
+        width: 100%;
+        height: auto;  /* 画像をレスポンシブにする */
+    }
+}
+
 </style>
 
