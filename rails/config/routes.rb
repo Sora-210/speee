@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :branches, only: [:show]
   root 'homes#index'
   resources :reviews, only: [:show]
+  resources :assessment, only: [:index, :create]
   resources :prefectures, only: [:show], param: :name do
     resources :cities, only: [:show], param: :name
   end

@@ -1,0 +1,87 @@
+<%= tag.meta name: 'robots', content: 'noindex' %>
+<% content_for :title, "査定依頼フォーム【べてらん住まい】" %>
+<% content_for :description, "特定の地域の不動産業者の検索結果を表示しています。" %>
+<div class="container" style="margin:20px 0 0 0;">
+    <h1>査定依頼フォーム</h1>
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                <h2>不動産情報フォーム</h2>
+                <% if @assessment&.errors&.any?%>
+                    <div class="alert alert-danger">
+                    <ul>
+                        <% @assessment.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                        <% end %>
+                    </ul>
+                    </div>
+                <% end %>
+                <%= form_with url:request.url, model:@assessment,local: true, html: { class: 'needs-validation', novalidate: '' } do |form| %>
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :last_name, '苗字:' %>
+                    <%= form.text_field :last_name, class: 'form-control' %>
+                    <%= form.label :first_name, '名前:' %>
+                    <%= form.text_field :first_name, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :last_name_kana, 'カナ:' %>
+                    <%= form.text_field :last_name_kana, class: 'form-control' %>
+                    <%= form.label :first_name_kana, 'カナ:' %>
+                    <%= form.text_field :first_name_kana, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :phone, '電話番号(ハイフンあり):' %>
+                    <%= form.telephone_field :phone, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :email, 'メールアドレス:' %>
+                    <%= form.email_field :email, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :address, '住所:' %>
+                    <%= form.text_field :address, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :building_type, '建物のタイプ:' %>
+                    <%= form.select :building_type, Assesment.building_types.map { |key, value| [I18n.t("enums.assessment.building_type.#{key}"), value] }, {}, class: 'form-control' %>
+
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :exclusive_area, '専有面積(平方メートル):' %>
+                    <%= form.number_field :exclusive_area, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :land_area, '土地面積(平方メートル):' %>
+                    <%= form.number_field :land_area, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :building_area, '建物面積(平方メートル):' %>
+                    <%= form.number_field :building_area, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :layout, '間取り:' %>
+                   <%= form.select :room_plan_type, Assesment.room_plan_types.map { |key, value| [I18n.t("enums.assessment.layout.#{key}"), value] }, {}, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                    <%= form.label :age, '築年数:' %>
+                    <%= form.number_field :age, class: 'form-control' %>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                    <%= form.submit '送信', class: 'btn btn-primary' %>
+                    </div>
+                <% end %>
+                </div>
+            </div>
+        </div>
+</div>
