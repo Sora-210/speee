@@ -15,8 +15,11 @@ class CitiesController < ApplicationController
     @prefecture_branch_ids = Branch.where(prefecture_id: @prefecture.id).pluck(:id)
     @city_branch_ids = Branch.where(city_id: @city.id).pluck(:id)
     @common_ids = @prefecture_branch_ids & @city_branch_ids
+    @prefecture_branch_ids_count = @prefecture_branch_ids.count
     @common_ids_count = @common_ids.count
-    # 被り度が8割以上だったらフラグをtrueにするロジックを書く
-end
+    if @common_ids_count >= @prefecture_branch_ids_count * 0.8
+      @is_no_index = true
+    end
   end
+end
   
