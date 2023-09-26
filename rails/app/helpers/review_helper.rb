@@ -1,6 +1,6 @@
 # app/helpers/reviews_helper.rb
 module ReviewHelper
-  def prefix_title_review(review)
+  def create_title(review)
     "（#{review.created_at.strftime("%Y年%-m月")}投稿）口コミ・評判 | #{review.branch.company.name}#{review.branch.name}"
   end
   def display_sale_reason(sale_reason_type)
