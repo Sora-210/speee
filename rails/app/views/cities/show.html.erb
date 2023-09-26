@@ -8,11 +8,10 @@
 <% if branch.reviews.count > 0 %>
     <li>
       <div class="card" style="width: 18rem;margin:15px 20px 0 0">
-      <%# Todo linkをbranch_pathに置き換える %>
         <%= link_to branch_path(branch.id) do %>
           <div class="card-body">
               <%= image_tag branch.logo_url, class:"card-img-top", alt:"不動産業者のロゴ"%>
-              <h2 class="card-title"><%= branch.name %></h2>
+              <h2 class="card-title"><%= branch.company.name %></h2>
               <h3 class="card-subtitle">★<%=branch.all_average_score()%></h3>
               <p class="card-text">営業時間：<%= branch.business_hours_text%></p>
               <p class="card-text">定休日：<%= branch.holidays_text%></p>
