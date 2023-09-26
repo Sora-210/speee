@@ -2,8 +2,10 @@
 <html>
   <head>
     <title><%= content_for?(:title) ? yield(:title) : "べてらん住まい" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "ベテランすまいなら不動産会社を口コミや評判を見て選ぶことができます!" %>">
+    <meta name="keywords" content="<%= content_for(:keywords) ? yield(:keywords) : "不動産会社,口コミ,評判" %>">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "べてらん住まいは信頼出来る体験談を基に不動産業者を選べるサービスです。" %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
