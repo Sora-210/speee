@@ -77,7 +77,7 @@ class AssessmentController < ApplicationController
           user_email: assessment.email,
           user_name: "#{assessment.last_name} #{assessment.first_name}",
           user_name_kana: "#{assessment.last_name_kana} #{assessment.first_name_kana}",
-          user_tel: assessment.tel
+          # user_tel: assessment.tel
       }
 
       request.body = request_data.to_json
