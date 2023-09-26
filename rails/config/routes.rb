@@ -2,8 +2,7 @@
 
 Rails.application.routes.draw do
   mount KomachiHeartbeat::Engine => '/ops'
-  resources :asses, only: [:create]
-  get '/asses', to: 'asses#index'
+  resources :branches, only: [:show]
   root 'homes#index'
   resources :reviews, only: [:show]
   resources :asses, only: [:index, :create]
