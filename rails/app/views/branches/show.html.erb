@@ -1,3 +1,5 @@
+<% breadcrumb :branch, @branch %>
+
 <h4 class="fw-bold mt-4 mx-3">ベテランすまい</h4>
 <h2 class='text-center'><%= @company.name %> <%= @branch.name %></h2>
 
@@ -9,6 +11,10 @@
 </div>
 <img src="<%=@branch.logo_url%>" alt="<%= @branch.name %> ロゴ"/>
 </div>
+
+<nav aria-label="パンくずリスト">
+  <%= breadcrumbs style: :bootstrap5 %>
+</nav>
 
  <div class="mt-5 d-flex ">
 <table class="table table-sm custom-table custom-margin">

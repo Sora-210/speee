@@ -1,3 +1,5 @@
+<% breadcrumb :review, @review %>
+
 <h4 class="fw-bold mt-4 mx-3">ベテランすまい</h3>
 
   <% branch = @review.branch %>
@@ -7,6 +9,9 @@
 
   <h2 class='text-center'><%= @review.title %></h2>
   <div class="custom-space">
+  <nav aria-label="パンくずリスト">
+    <%= breadcrumbs style: :bootstrap5 %>
+  </nav>
   <div class=" mt-5">
   <p class="lh-sm  mb-2">売却した不動産会社名: <%= company.name %></p>
   <p class="lh-sm  mb-2">住所: <%= prefecture_name %><%= city_name %></p>
