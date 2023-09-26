@@ -1,4 +1,5 @@
 <% content_for(:title, "（#{format_japanese_date(@review.created_at)}投稿）口コミ・評判 | #{@review.branch.company.name}#{@review.branch.name}") %>
+<% content_for(:keywords, "不動産会社,#{@review.branch.company.name},#{@review.branch.name.blank? ? "" : "#{@review.branch.name}," }口コミ,評判") %>
 
 <h4 class="fw-bold mt-4 mx-3">ベテランすまい</h3>
   <% branch = @review.branch %>
