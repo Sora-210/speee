@@ -51,9 +51,9 @@
  </div>
   <p class="mt-5"><strong><%= @company.name %>で売却したひとの不動産会社についての口コミ（平均評価★<%=two_decimal_avg(@overall_avg)%>)</strong></p>
 
- <div class="row">
-  <% @branch.reviews.each do |review| %>
-    <div class="col-8 mb-4">
+<% @branch.reviews.each do |review| %>
+  <div class="col-8 mb-4">
+    <%= link_to review_path(review), class: 'card-link' do %>
       <div class="card mb-4">
         <div class="card-body">
           <p class="card-title"><strong><%= review.title %>: ★<%= review.support_cs %></strong></p>
@@ -61,9 +61,10 @@
           <p class="card-text text-end">成約価格<%= price_in_millions_with_delimiter(review.close_price) %>万円（<%= @branch.prefecture.name %><%= @branch.city.name %>: <%= review.po_season.strftime("%Y年%-m月") %> ）</p>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>
+
 </div>
 <div class="d-flex justify-content-center align-items-center mt-5 mb-5">
   <button class="btn btn-primary  custom-button">査定依頼をする</button>
@@ -93,6 +94,12 @@
     font-size: 1.5rem; /* フォントサイズを大きくする */
     font-weight: bold; /* 太字にする */
   }
+
+  a {
+  text-decoration: none !important;
+  color: inherit !important; 
+}
+
 
   @media screen and (max-width: 768px) {
     .custom-space {
