@@ -25,8 +25,7 @@ class AssessmentController < ApplicationController
       return render :index
     end
     # TODO: ストロングパラメーターにリファクタリングを行う
-    @assessment = Assesment.new(city_id: @branch.city_id, prefecture_id: @branch.prefecture_id,
-                                branch_id: @branch.id, last_name: params[:last_name], first_name: params[:first_name], last_name_kana: params[:last_name_kana], first_name_kana: params[:first_name_kana], tel: params[:phone], email: params[:email], address: params[:address], building_type: params[:building_type].to_i, exclusive_area: params[:exclusive_area].to_i, land_area: params[:land_area].to_i, building_area: params[:building_area].to_i, room_plan_type: params[:room_plan_type].to_i, constructed_year: params[:constructed_year].to_i)
+    @assessment = build_assessment
     return redirect_to action: :error unless @assessment.save
 
     response = post_to_external_api_with_net_http(@assessment)
@@ -47,11 +46,47 @@ end
 
 def validiate_phone(params)
   # TODO: モデル側の責務であるため、処理を移動する
-  if params[:phone].match(/\A(((0(\d{1}[-(]?\d{4}|\d{2}[-(]?\d{3}|\d{3}[-(]?\d{2}|\d{4}[-(]?\d{1}|[5789]0[-(]?\d{4})[-)]?)|\d{1,4}-?)\d{4}|0120[-(]?\d{3}[-)]?\d{3})\z/)
-    return true
-  end
+  phone_pattern = /
+    \A
+    (
+      (
+        (0(\d{1}[-(]?\d{4}|
+           \d{2}[-(]?\d{3}|
+           \d{3}[-(]?\d{2}|
+           \d{4}[-(]?\d{1}|
+           [5789]0[-(]?\d{4})
+        [-)]?
+        )
+        |\d{1,4}-?
+      )
+      \d{4}|
+      0120[-(]?\d{3}[-)]?\d{3}
+    )
+    \z
+  /x
 
-  false
+  params[:phone].match?(phone_pattern)
+end
+
+def build_assessment
+  Assesment.new(
+    city_id: @branch.city_id,
+    prefecture_id: @branch.prefecture_id,
+    branch_id: @branch.id,
+    last_name: params[:last_name],
+    first_name: params[:first_name],
+    last_name_kana: params[:last_name_kana],
+    first_name_kana: params[:first_name_kana],
+    tel: params[:phone],
+    email: params[:email],
+    address: params[:address],
+    building_type: params[:building_type].to_i,
+    exclusive_area: params[:exclusive_area].to_i,
+    land_area: params[:land_area].to_i,
+    building_area: params[:building_area].to_i,
+    room_plan_type: params[:room_plan_type].to_i,
+    constructed_year: params[:constructed_year].to_i
+  )
 end
 
     private
