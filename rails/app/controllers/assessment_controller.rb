@@ -15,8 +15,7 @@ class AssessmentController < ApplicationController
 
     return if @branch.nil?
 
-    puts "adafagfdzwqads"
-    @assessment = Assesment.new(assessment_params)
+    @assessment = Assessment.new(assessment_params)
     return redirect_to action: :error unless @assessment.save
 
     response = post_to_external_api_with_net_http(@assessment)

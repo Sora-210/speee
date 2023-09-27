@@ -52,7 +52,7 @@
 
                     <div class="form-group" style="margin-top: 20px;">
                     <%= form.label :building_type, '建物のタイプ:' %>
-                    <%= form.select :building_type, Assesment.building_types.map { |key, value| [I18n.t("enums.assessment.building_type.#{key}"), value] }, {}, class: 'form-control' %>
+                    <%= form.select :building_type, Assessment.building_types.map { |key, value| [I18n.t("enums.assessment.building_type.#{key}"), value] }, {}, class: 'form-control' %>
 
                     </div>
 
@@ -73,7 +73,7 @@
 
                     <div class="form-group" style="margin-top: 20px;">
                     <%= form.label :layout, '間取り:' %>
-                   <%= form.select :room_plan_type, Assesment.room_plan_types.map { |key, value| [I18n.t("enums.assessment.layout.#{key}"), value] }, {}, class: 'form-control' %>
+                   <%= form.select :room_plan_type, Assessment.room_plan_types.map { |key, value| [I18n.t("enums.assessment.layout.#{key}"), value] }, {}, class: 'form-control' %>
                     </div>
 
                     <div class="form-group" style="margin-top: 20px;">

@@ -2,10 +2,10 @@
 
 class City < ApplicationRecord
   belongs_to :prefecture
-  has_many :assesment_areas
+  has_many :assessment_areas
   has_many :branches
   has_many :reviews
-  has_many :assesments
+  has_many :assessments
   def no_index?
     prefecture_branch_ids = prefecture.branches.pluck(:id)
     city_branch_ids = branches.pluck(:id)

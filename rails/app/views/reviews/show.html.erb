@@ -45,13 +45,13 @@
             </tr>
             <tr>
                 <td>査定依頼時期/価格</td>
-                <td><%=format_japanese_date(@review.assesment_season)%></td>
-                <td><%= number_with_delimiter(@review.assesment_price / 10000)%>万円</td>
+                <td><%=format_japanese_date(@review.assessment_season)%></td>
+                <td><%= number_with_delimiter(@review.assessment_price / 10000)%>万円</td>
             </tr>
             <tr>
                 <td>売出時期/価格</td>
                 <td><%= format_japanese_date(@review.po_season)%></td>
-                <td><%= number_with_delimiter(@review.assesment_price / 10000)%>万円</td>
+                <td><%= number_with_delimiter(@review.assessment_price / 10000)%>万円</td>
             </tr>
             <tr>
                 <td>売却時期/価格</td>
