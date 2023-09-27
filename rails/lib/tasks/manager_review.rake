@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+require 'English'
 require 'csv'
 
 namespace :manager_review do
@@ -44,41 +47,41 @@ namespace :manager_review do
         prefecture = Prefecture.find_by(name: data['prefecture'])
         city = City.find_by(name: data['city'])
 
-        print "\r処理中: #{$.}件目"
+        print "\r処理中: #{$INPUT_LINE_NUMBER}件目"
 
         # Review
-        review = branch.reviews.create({
-                                         prefecture_id: prefecture.id,
-                                         city_id: city.id,
-                                         name: data['name'],
-                                         gender: gender[data['gender']],
-                                         age: data['age'],
-                                         address: data['address'],
-                                         building_type: building_type[data['building_type']],
-                                         times_type: times_type[data['times']],
-                                         consider_season: data['consider_season'],
-                                         assesment_season: data['assesment_season'],
-                                         po_season: data['po_season'],
-                                         sale_season: data['sale_season'],
-                                         delivery_season: data['delivery_season'],
-                                         speed_cs: data['speed_cs'],
-                                         assesment_price: data['assesment_price'],
-                                         sale_price: data['sale_price'],
-                                         is_price_down: data['is_price_down'],
-                                         price_down_month: data['price_down_month'],
-                                         price_down_amount: data['price_down_amount'],
-                                         close_price: data['close_price'],
-                                         price_cs: data['price_cs'],
-                                         contract_type: (data['contract_type'].to_i - 1),
-                                         title: data['title'],
-                                         sale_reason_type: data['sale_reason_type'].to_i == 99 ? data['sale_reason_type'].to_i : data['sale_reason_type'].to_i - 1,
-                                         anxiety: data['anxiety'],
-                                         decision_reason: data['decision_reason'],
-                                         support_cs: data['support_cs'],
-                                         support_reason: data['support_reason'],
-                                         advice: data['advice'],
-                                         request: data['request']
-                                       })
+        branch.reviews.create({
+                                prefecture_id: prefecture.id,
+                                city_id: city.id,
+                                name: data['name'],
+                                gender: gender[data['gender']],
+                                age: data['age'],
+                                address: data['address'],
+                                building_type: building_type[data['building_type']],
+                                times_type: times_type[data['times']],
+                                consider_season: data['consider_season'],
+                                assesment_season: data['assesment_season'],
+                                po_season: data['po_season'],
+                                sale_season: data['sale_season'],
+                                delivery_season: data['delivery_season'],
+                                speed_cs: data['speed_cs'],
+                                assesment_price: data['assesment_price'],
+                                sale_price: data['sale_price'],
+                                is_price_down: data['is_price_down'],
+                                price_down_month: data['price_down_month'],
+                                price_down_amount: data['price_down_amount'],
+                                close_price: data['close_price'],
+                                price_cs: data['price_cs'],
+                                contract_type: (data['contract_type'].to_i - 1),
+                                title: data['title'],
+                                sale_reason_type: data['sale_reason_type'].to_i == 99 ? data['sale_reason_type'].to_i : data['sale_reason_type'].to_i - 1,
+                                anxiety: data['anxiety'],
+                                decision_reason: data['decision_reason'],
+                                support_cs: data['support_cs'],
+                                support_reason: data['support_reason'],
+                                advice: data['advice'],
+                                request: data['request']
+                              })
       end
 
       print "\r" # progress消去
@@ -87,7 +90,7 @@ namespace :manager_review do
     after_count = Review.count
 
     puts "Review: #{after_count - before_count}件 追加しました"
-    raise '挿入件数が0件です' if (after_count - before_count) == 0
+    raise '挿入件数が0件です' if (after_count - before_count).zero?
   rescue ActiveRecord::RecordNotFound
     Rails.logger.error '[ERROR]'
     Rails.logger.error 'branch_id/Prefecture/Cityのいずれかが間違っています'
@@ -132,7 +135,7 @@ namespace :manager_review do
       exit
     end
 
-    review = Review.find(args.review_id).update(is_public: true)
+    Review.find(args.review_id).update(is_public: true)
   rescue ActiveRecord::RecordNotFound
     Rails.logger.error '[ERROR]'
     Rails.logger.error '対象体験談が見つかりません'
@@ -152,7 +155,7 @@ namespace :manager_review do
       exit
     end
 
-    review = Review.find(args.review_id).update(is_public: false)
+    Review.find(args.review_id).update(is_public: false)
   rescue ActiveRecord::RecordNotFound
     Rails.logger.error '[ERROR]'
     Rails.logger.error '対象体験談が見つかりません'

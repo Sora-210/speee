@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'net/http'
 require 'uri'
 
@@ -80,5 +82,5 @@ def post_to_external_api_with_net_http(assessment)
 
   request.body = request_data.to_json
 
-  response = http.request(request)
+  http.request(request)
 end

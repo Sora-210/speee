@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # app/helpers/reviews_helper.rb
 module ReviewHelper
   def display_sale_reason(sale_reason_type)

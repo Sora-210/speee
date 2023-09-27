@@ -27,7 +27,7 @@ module Rail
     end
 
     # logger
-    config.logger = Logger.new(STDOUT)
+    config.logger = Logger.new($stdout)
     config.log_level = :error
   end
 end

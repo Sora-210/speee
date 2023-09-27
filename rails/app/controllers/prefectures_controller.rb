@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PrefecturesController < ApplicationController
   def show
     @prefecture = Prefecture.find_by(name: params[:name])

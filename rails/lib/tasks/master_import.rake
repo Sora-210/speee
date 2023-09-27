@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 namespace :master_import do
@@ -10,7 +12,7 @@ namespace :master_import do
       csv = Rails.root.join((args.path.presence || 'prefecture.csv'))
       ActiveRecord::Base.transaction do
         CSV.foreach(csv, headers: true) do |data|
-          raise SyntaxError if data['id'].to_i == 0
+          raise SyntaxError if data['id'].to_i.zero?
 
           Prefecture.create({
                               id: data['id'].to_i,
@@ -47,7 +49,7 @@ namespace :master_import do
       csv = Rails.root.join((args.path.presence || 'city.csv'))
       ActiveRecord::Base.transaction do
         CSV.foreach(csv, headers: true) do |data|
-          raise SyntaxError if data['id'].to_i == 0
+          raise SyntaxError if data['id'].to_i.zero?
 
           City.create({
                         id: data['id'],
@@ -60,7 +62,7 @@ namespace :master_import do
 
       after_count = City.count
       puts "City: #{after_count - before_count}件 挿入しました"
-      raise '挿入件数が0件です' if (after_count - before_count) == 0
+      raise '挿入件数が0件です' if (after_count - before_count).zero?
     rescue ActiveRecord::RecordNotUnique
       Rails.logger.error '[ERROR]'
       Rails.logger.error 'IDが重複しています'
@@ -91,7 +93,7 @@ namespace :master_import do
 
       ActiveRecord::Base.transaction do
         CSV.foreach(csv, headers: true) do |data|
-          raise SyntaxError if data['company_id'].to_i == 0 || data['branch_id'].to_i == 0
+          raise SyntaxError if data['company_id'].to_i.zero? || data['branch_id'].to_i.zero?
 
           # Company
           company = Company.find_or_create_by(id: data['company_id']) do |company|
@@ -134,7 +136,7 @@ namespace :master_import do
       puts "Company: #{after_company_count - before_company_count}件 挿入しました"
       puts "Branch: #{after_branch_count - before_branch_count}件 挿入しました"
       puts "AssesmentArea: #{after_assesment_area_count - before_assesment_area_count}件 挿入しました"
-      raise '挿入件数が0件です' if (after_assesment_area_count - before_assesment_area_count) == 0
+      raise '挿入件数が0件です' if (after_assesment_area_count - before_assesment_area_count).zero?
     rescue ActiveRecord::RecordNotUnique
       Rails.logger.error '[ERROR]'
       Rails.logger.error 'IDが重複しています'
@@ -175,45 +177,45 @@ namespace :master_import do
           city = City.find_by(name: data['city'])
 
           # Review
-          review = branch.reviews.create({
-                                           prefecture_id: prefecture.id,
-                                           city_id: city.id,
-                                           name: data['name'],
-                                           gender: gender[data['gender']],
-                                           age: data['age'],
-                                           address: data['address'],
-                                           building_type: building_type[data['building_type']],
-                                           times_type: times_type[data['times']],
-                                           consider_season: data['consider_season'],
-                                           assesment_season: data['assesment_season'],
-                                           po_season: data['po_season'],
-                                           sale_season: data['sale_season'],
-                                           delivery_season: data['delivery_season'],
-                                           speed_cs: data['speed_cs'],
-                                           assesment_price: data['assesment_price'],
-                                           sale_price: data['sale_price'],
-                                           is_price_down: data['is_price_down'],
-                                           price_down_month: data['price_down_month'],
-                                           price_down_amount: data['price_down_amount'],
-                                           close_price: data['close_price'],
-                                           price_cs: data['price_cs'],
-                                           contract_type: (data['contract_type'].to_i - 1),
-                                           title: data['title'],
-                                           sale_reason_type: data['sale_reason_type'].to_i == 99 ? data['sale_reason_type'].to_i : data['sale_reason_type'].to_i - 1,
-                                           anxiety: data['anxiety'],
-                                           decision_reason: data['decision_reason'],
-                                           support_cs: data['support_cs'],
-                                           support_reason: data['support_reason'],
-                                           advice: data['advice'],
-                                           request: data['request']
-                                         })
+          branch.reviews.create({
+                                  prefecture_id: prefecture.id,
+                                  city_id: city.id,
+                                  name: data['name'],
+                                  gender: gender[data['gender']],
+                                  age: data['age'],
+                                  address: data['address'],
+                                  building_type: building_type[data['building_type']],
+                                  times_type: times_type[data['times']],
+                                  consider_season: data['consider_season'],
+                                  assesment_season: data['assesment_season'],
+                                  po_season: data['po_season'],
+                                  sale_season: data['sale_season'],
+                                  delivery_season: data['delivery_season'],
+                                  speed_cs: data['speed_cs'],
+                                  assesment_price: data['assesment_price'],
+                                  sale_price: data['sale_price'],
+                                  is_price_down: data['is_price_down'],
+                                  price_down_month: data['price_down_month'],
+                                  price_down_amount: data['price_down_amount'],
+                                  close_price: data['close_price'],
+                                  price_cs: data['price_cs'],
+                                  contract_type: (data['contract_type'].to_i - 1),
+                                  title: data['title'],
+                                  sale_reason_type: data['sale_reason_type'].to_i == 99 ? data['sale_reason_type'].to_i : data['sale_reason_type'].to_i - 1,
+                                  anxiety: data['anxiety'],
+                                  decision_reason: data['decision_reason'],
+                                  support_cs: data['support_cs'],
+                                  support_reason: data['support_reason'],
+                                  advice: data['advice'],
+                                  request: data['request']
+                                })
         end
       end
 
       after_count = Review.count
 
       puts "Review: #{after_count - before_count}件 挿入しました"
-      raise '挿入件数が0件です' if (after_count - before_count) == 0
+      raise '挿入件数が0件です' if (after_count - before_count).zero?
     rescue ActiveRecord::RecordNotUnique
       Rails.logger.error '[ERROR]'
       Rails.logger.error 'IDが重複しています'
