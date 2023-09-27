@@ -1,3 +1,3 @@
 class Company < ApplicationRecord
-    has_many :branches
+  has_many :branches
 end

@@ -1,5 +1,5 @@
 crumb :root do
-  link "Top"
+  link 'Top'
 end
 
 crumb :prefecture do |prefecture|
@@ -23,6 +23,6 @@ crumb :branch do |branch|
 end
 
 crumb :review do |review|
-  link "口コミ"
+  link '口コミ'
   parent :branch, review.branch
 end

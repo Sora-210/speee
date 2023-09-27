@@ -9,4 +9,3 @@ class BranchesController < ApplicationController
     @overall_avg = (@speed_cs_avg + @price_cs_avg + @support_cs_avg) / 3.0
   end
 end
-
