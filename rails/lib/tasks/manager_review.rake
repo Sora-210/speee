@@ -50,6 +50,48 @@ namespace :manager_review do
         print "\r処理中: #{$INPUT_LINE_NUMBER}件目"
 
         # Review
+      calculated_sale_reason = if data['sale_reason_type'].to_i == 99
+          data['sale_reason_type'].to_i
+        else
+          data['sale_reason_type'].to_i - 1
+        end
+
+            branch.reviews.create({
+                                prefecture_id: prefecture.id,
+                                city_id: city.id,
+                                name: data['name'],
+                                gender: gender[data['gender']],
+                                age: data['age'],
+                                address: data['address'],
+                                building_type: building_type[data['building_type']],
+                                times_type: times_type[data['times']],
+                                consider_season: data['consider_season'],
+                                assesment_season: data['assesment_season'],
+                                po_season: data['po_season'],
+                                sale_season: data['sale_season'],
+                                delivery_season: data['delivery_season'],
+                                speed_cs: data['speed_cs'],
+                                assesment_price: data['assesment_price'],
+                                sale_price: data['sale_price'],
+                                is_price_down: data['is_price_down'],
+                                price_down_month: data['price_down_month'],
+                                price_down_amount: data['price_down_amount'],
+                                close_price: data['close_price'],
+                                price_cs: data['price_cs'],
+                                contract_type: (data['contract_type'].to_i - 1),
+                                title: data['title'],
+                                sale_reason_type: calculated_sale_reason,
+                                anxiety: data['anxiety'],
+                                decision_reason: data['decision_reason'],
+                                support_cs: data['support_cs'],
+                                support_reason: data['support_reason'],
+                                advice: data['advice'],
+                                request: data['request']
+                              })
+      end
+
+      print "\r" # progress消去
+    end
         branch.reviews.create({
                                 prefecture_id: prefecture.id,
                                 city_id: city.id,
