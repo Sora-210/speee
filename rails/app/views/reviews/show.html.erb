@@ -1,5 +1,8 @@
-<h4 class="fw-bold mt-4 mx-3">ベテランすまい</h3>
+<% breadcrumb :review, @review %>
+<% content_for(:title, "（#{format_japanese_date(@review.created_at)}投稿）口コミ・評判 | #{@review.branch.company.name}#{@review.branch.name}") %>
+<% content_for(:keywords, "不動産会社,#{@review.branch.company.name},#{@review.branch.name.blank? ? "" : "#{@review.branch.name}," }口コミ,評判") %>
 
+<h4 class="fw-bold mt-4 mx-3">ベテランすまい</h3>
   <% branch = @review.branch %>
   <% company = @review.branch.company %>
   <% prefecture_name = @review.prefecture.name %>
@@ -7,6 +10,9 @@
 
   <h2 class='text-center'><%= @review.title %></h2>
   <div class="custom-space">
+  <nav aria-label="パンくずリスト">
+    <%= breadcrumbs style: :bootstrap5 %>
+  </nav>
   <div class=" mt-5">
   <p class="lh-sm  mb-2">売却した不動産会社名: <%= company.name %></p>
   <p class="lh-sm  mb-2">住所: <%= prefecture_name %><%= city_name %></p>
@@ -77,17 +83,34 @@
   </div>
 
   <style>
+     .custom-space {
+    margin: 0px 5%;
+  }
+
+  .table-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .custom-button {
+    font-size: 15px;
+    padding: 10px 34px;
+  }
+
+  @media screen and (max-width: 768px) {
     .custom-space {
-       margin-left:20%;
+      margin: 0px 2%;
     }
+
     .custom-button {
-        font-size: 15px;
-        padding: 10px 34px; 
+      font-size: 12px;
+      padding: 8px 24px;
     }
 
-
-.table-container {
-  width:800px
-}
+    h2.text-center {
+      font-size: 1.3rem;  /* 例として1.5remに調整。必要に応じて値を変更してください。 */
+    }
+  }
 
 </style>

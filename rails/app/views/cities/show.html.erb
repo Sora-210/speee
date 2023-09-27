@@ -1,32 +1,49 @@
-<% content_for :title, "不動産検索結果表示" %>
-<% content_for :description, "特定の地域の不動産業者の検索結果を表示しています。" %>
+<% breadcrumb :city, @city %>
+<% content_for :title, "#{@city.prefecture.name}#{@city.name}で不動産売却に強い会社は?" %>
+<% content_for(:description, "#{@city.prefecture.name}#{@city.name}の不動産を売却したいけど、どこに相談したらいいかわからない！そんな方へ、ベテランすまいなら#{@city.prefecture.name}の不動産会社を口コミや評判を見て選ぶことができます！") %>
+<% content_for(:keywords, "不動産会社,#{@city.prefecture.name},#{@city.name},一覧") %>
 <% if @is_no_index%>
   <% content_for :no_index do %>
     <meta name="robots" content="noindex">
   <% end %>
 <%end%>
-<div class="container-fluid" style="margin: 20px 0 20px 10px;">
+
+<nav class="navbar navbar-light ">
+  <div class="container">
+    <h4 class="fw-bold mx-3 navbar-brand">ベテランすまい</h4>
+  </div>
+</nav>
+<div class="container mt-4">
   <h1><%= @prefecture.name%>の<%= @city.name%>の不動産会社</h1>
-</div>
-<ul style="list-style: none;display:flex; flex-wrap: wrap;">
-<% @branches.each do |branch| %>
-<% if branch.reviews.count > 0 %>
-    <li>
-      <div class="card" style="width: 18rem;margin:15px 20px 0 0">
-        <%= link_to branch_path(branch.id) do %>
-          <div class="card-body">
-              <%= image_tag branch.logo_url, class:"card-img-top", alt:"不動産業者のロゴ"%>
-              <h2 class="card-title"><%= branch.company.name %></h2>
-              <h3 class="card-subtitle">★<%=branch.all_average_score()%></h3>
-              <p class="card-text">営業時間：<%= branch.business_hours_text%></p>
-              <p class="card-text">定休日：<%= branch.holidays_text%></p>
-              <p class="card-text">住所：<%= branch.address %></p>
-              <p class="card-text">会社の決め手：<%= branch.reviews[0].decision_reason %></p>
+  <nav aria-label="パンくずリスト">
+    <%= breadcrumbs style: :bootstrap5 %>
+  </nav>
+    <div class="row">
+      <% @branches.each do |branch| %>
+        <% if branch.reviews.count > 0 %>
+          <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+              <%= link_to branch_path(branch.id), class: "text-dark text-decoration-none" do %>
+                <%= image_tag branch.logo_url, class:"card-img-top", alt:"不動産業者のロゴ"%>
+                <div class="card-body">
+                  <h2 class="card-title"><%= branch.company.name %></h2>
+                  <h3 class="card-subtitle mb-2">★<%=branch.all_average_score()%></h3>
+                  <p class="card-text">営業時間：<%= branch.business_hours_text%></p>
+                  <p class="card-text">定休日：<%= branch.holidays_text%></p>
+                  <p class="card-text">住所：<%= branch.address %></p>
+                  <p class="card-text">会社の決め手：<%= branch.reviews[0].decision_reason %></p>
+                </div>
+              <% end %>
             </div>
-          <% end %>
-      </div>
-    </li>
-    <%end%>
-  <% end %>
-  </ul>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
+
+<style>
+  a.text-dark:hover {
+    text-decoration: none;
+  }
+</style>

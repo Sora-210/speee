@@ -1,35 +1,58 @@
-<% content_for :title, "不動産検索結果表示" %>
-<% content_for :description, "特定の地域の不動産業者の検索結果を表示しています。" %>
-<div class="container-fluid" style="margin: 20px 0 20px 10px;">
-  <h1><%= @prefecture.name%>の不動産会社</h1>
-</div>
-<ul style="list-style: none;display:flex; flex-wrap: wrap;">
-<% @branches.each do |branch| %>
-<% if branch.reviews.count > 0 %>
-    <li>
-      <div class="card" style="width: 18rem;margin:15px 20px 0 0">
-        <%= link_to branch_path(branch.id) do %>
-          <div class="card-body">
-              <%= image_tag branch.logo_url, class:"card-img-top", alt:"不動産業者のロゴ"%>
+<% breadcrumb :prefecture, @prefecture %>
+<% content_for(:title, "#{@prefecture.name}で不動産売却に強い会社は?") %>
+<% content_for(:description, "#{@prefecture.name}の不動産を売却したいけど、どこに相談したらいいかわからない！そんな方へ、ベテランすまいなら#{@prefecture.name}の不動産会社を口コミや評判を見て選ぶことができます！") %>
+<% content_for(:keywords, "不動産会社,#{@prefecture.name},一覧") %>
+
+
+<nav class="navbar navbar-light ">
+  <div class="container">
+    <h4 class="fw-bold mx-3 navbar-brand">ベテランすまい</h4>
+  </div>
+</nav>
+<div class="container mt-4">
+  <h1><%= @prefecture.name %>の不動産会社</h1>
+  <nav aria-label="パンくずリスト">
+    <%= breadcrumbs style: :bootstrap5 %>
+  </nav>
+  <div class="row">
+    <% @branches.each do |branch| %>
+    <% if branch.reviews.count > 0 %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <%= link_to branch_path(branch.id) do %>
+            <div class="card-body">
+              <%= image_tag branch.logo_url, class:"card-img-top", alt:"不動産業者のロゴ" %>
               <h2 class="card-title"><%= branch.company.name %></h2>
-              <h3 class="card-subtitle">★<%=branch.all_average_score()%></h3>
-              <p class="card-text">営業時間：<%= branch.business_hours_text%></p>
-              <p class="card-text">定休日：<%= branch.holidays_text%></p>
+              <h3 class="card-subtitle">★<%=branch.all_average_score() %></h3>
+              <p class="card-text">営業時間：<%= branch.business_hours_text %></p>
+              <p class="card-text">定休日：<%= branch.holidays_text %></p>
               <p class="card-text">住所：<%= branch.address %></p>
               <p class="card-text">会社の決め手：<%= branch.reviews[0].decision_reason %></p>
             </div>
           <% end %>
+        </div>
       </div>
-    </li>
-    <%end%>
-  <% end %>
-  </ul>
-<div class="container" style="width: 100%;margin:20px 15px 10px 15px;border: 1px solid;border-radius:10px">
-<h2 style="margin:20px 0 15px 0;font-size:26px"><%= @prefecture.name%>の他の地域の不動産会社を見る</h2>
-<div class="container" style="margin:0 0 20px 0; display: flex; flex-wrap: wrap;">
-<% @cities.each do |city|%>
-<%# Todo linkをcity_pathに置き換える %>
-      <%= link_to city.name, prefecture_path + "/cities/#{city.name}", style: 'width: 20%;margin: 10px 20px 0 0'%>
-  <%end%>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="border rounded mt-4 p-4">
+    <h2 class="mb-4"><%= @prefecture.name %>の他の地域の不動産会社を見る</h2>
+    <div class="row">
+      <% @cities.each do |city| %>
+      <%# Todo linkをcity_pathに置き換える %>
+      <div class="col-6 col-md-3 mb-2">
+     <%= link_to city.name, prefecture_city_path(@prefecture.name, city.name), class: "d-block" %>
+      </div>
+      <% end %>
+    </div>
   </div>
 </div>
+
+
+<style>
+  a, a:hover, a:focus {
+    color: black;
+    text-decoration: none;
+  }
+</style>
