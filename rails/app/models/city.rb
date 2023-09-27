@@ -4,7 +4,7 @@ class City < ApplicationRecord
     has_many :branches
     has_many :reviews
     has_many :assesments
-    def is_no_index
+    def no_index?
         prefecture_branch_ids = prefecture.branches.pluck(:id)
         city_branch_ids = branches.pluck(:id)
         duplicate_ids = prefecture_branch_ids & city_branch_ids
