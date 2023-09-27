@@ -4,9 +4,9 @@ class Branch < ApplicationRecord
   belongs_to :company
   belongs_to :prefecture
   belongs_to :city
-  has_many :assesment_areas
-  has_many :reviews
-  has_many :assesments
+  has_many :assesment_areas, dependent: :destroy
+  has_many :reviews, dependent: :nullify
+  has_many :assesments, dependent: :destroy
   def all_average_score
     total_score = (speed_average_score + price_average_score + support_average_score) / 3
     total_score.round(1)
