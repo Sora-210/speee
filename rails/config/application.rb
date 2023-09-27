@@ -20,14 +20,14 @@ module Rail
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.action_controller.default_url_options = { :trailing_slash => true }
+    config.action_controller.default_url_options = { trailing_slash: true }
 
     config.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
       r301 %r{^(.+)/$}, '$1'
     end
-    
+
     # logger
-    config.logger = Logger.new(STDOUT)
+    config.logger = Logger.new($stdout)
     config.log_level = :error
   end
 end
