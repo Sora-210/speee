@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  rescue_from ActiveRecord::RecordNotFound, with: :render_four_oh_four
 
   private
 
-  def render_404
+  def render_four_oh_four
     if request.format.to_sym == :json
       render json: { error: '404 Not Found' }, status: :not_found
     else
