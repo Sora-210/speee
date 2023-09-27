@@ -15,9 +15,8 @@ class AssessmentController < ApplicationController
 
     return if @branch.nil?
 
-    # TODO: ストロングパラメーターにリファクタリングを行う
-    @assessment = Assesment.new(city_id: @branch.city_id, prefecture_id: @branch.prefecture_id,
-                                branch_id: @branch.id, last_name: params[:last_name], first_name: params[:first_name], last_name_kana: params[:last_name_kana], first_name_kana: params[:first_name_kana], tel: params[:phone], email: params[:email], address: params[:address], building_type: params[:building_type].to_i, exclusive_area: params[:exclusive_area].to_i, land_area: params[:land_area].to_i, building_area: params[:building_area].to_i, room_plan_type: params[:room_plan_type].to_i, constructed_year: params[:constructed_year].to_i)
+    puts "adafagfdzwqads"
+    @assessment = Assesment.new(assessment_params)
     return redirect_to action: :error unless @assessment.save
 
     response = post_to_external_api_with_net_http(@assessment)
@@ -27,7 +26,9 @@ class AssessmentController < ApplicationController
   end
 end
     private
-
+def assessment_params
+  params.require(:assessment).permit(:city_id, :prefecture_id, :branch_id, :last_name, :first_name, :last_name_kana, :first_name_kana, :tel, :email, :address, :building_type, :exclusive_area, :land_area, :building_area, :room_plan_type, :constructed_year)
+end
 def post_to_external_api_with_net_http(assessment)
   uri = URI.parse('https://miniul-api.herokuapp.com/affiliate/v2/conversions')
   http = Net::HTTP.new(uri.host, uri.port)
