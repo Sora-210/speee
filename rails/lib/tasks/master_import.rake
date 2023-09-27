@@ -96,8 +96,8 @@ namespace :master_import do
           raise SyntaxError if data['company_id'].to_i.zero? || data['branch_id'].to_i.zero?
 
           # Company
-          company = Company.find_or_create_by(id: data['company_id']) do |company|
-            company.name = data['name']
+          company = Company.find_or_create_by(id: data['company_id']) do |c|
+            c.name = data['name']
           end
 
           # 住所取得
