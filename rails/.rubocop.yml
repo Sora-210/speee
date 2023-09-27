@@ -26,6 +26,10 @@ Metrics/AbcSize:
   Max: 50
 
 Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - 'lib/tasks/*'
+    - 'db/migrate/*'
   Max: 50
 
 Rails/BulkChangeTable:
