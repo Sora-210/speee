@@ -43,7 +43,7 @@ class AssessmentController < ApplicationController
       room_plan_type: params[:room_plan_type].to_i,
       constructed_year: params[:constructed_year].to_i
     )
-    
+
     return redirect_to action: :error unless @assessment.save
 
     response = post_to_external_api_with_net_http(@assessment)
@@ -64,7 +64,7 @@ end
 
 def validiate_phone(params)
   # TODO: モデル側の責務であるため、処理を移動する
-  phone_pattern = %r{
+  phone_pattern = /
     \A
     (
       (
@@ -81,7 +81,7 @@ def validiate_phone(params)
       0120[-(]?\d{3}[-)]?\d{3}
     )
     \z
-  }x
+  /x
 
   params[:phone].match?(phone_pattern)
 end

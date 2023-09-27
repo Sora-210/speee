@@ -178,10 +178,10 @@ namespace :master_import do
 
           # Review
           calculated_sale_reason = if data['sale_reason_type'].to_i == 99
-            data['sale_reason_type'].to_i
-          else
-            data['sale_reason_type'].to_i - 1
-          end
+                                     data['sale_reason_type'].to_i
+                                   else
+                                     data['sale_reason_type'].to_i - 1
+                                   end
 
           branch.reviews.create({
                                   prefecture_id: prefecture.id,
