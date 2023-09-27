@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def render_404
+  def render_404(error)
     if request.format.to_sym == :json
       render json: { error: '404 Not Found' }, status: :not_found
     else
