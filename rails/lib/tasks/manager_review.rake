@@ -50,6 +50,8 @@ namespace :manager_review do
         print "\r処理中: #{$INPUT_LINE_NUMBER}件目"
 
         # Review
+        calculated_sale_reason = data['sale_reason_type'].to_i == 99 ? 99 : data['sale_reason_type'].to_i - 1
+
         branch.reviews.create({
                                 prefecture_id: prefecture.id,
                                 city_id: city.id,
@@ -74,7 +76,7 @@ namespace :manager_review do
                                 price_cs: data['price_cs'],
                                 contract_type: (data['contract_type'].to_i - 1),
                                 title: data['title'],
-                                sale_reason_type: data['sale_reason_type'].to_i == 99 ? data['sale_reason_type'].to_i : data['sale_reason_type'].to_i - 1,
+                                sale_reason_type: calculated_sale_reason,
                                 anxiety: data['anxiety'],
                                 decision_reason: data['decision_reason'],
                                 support_cs: data['support_cs'],

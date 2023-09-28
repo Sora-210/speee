@@ -96,8 +96,8 @@ namespace :master_import do
           raise SyntaxError if data['company_id'].to_i.zero? || data['branch_id'].to_i.zero?
 
           # Company
-          company = Company.find_or_create_by(id: data['company_id']) do |company|
-            company.name = data['name']
+          company = Company.find_or_create_by(id: data['company_id']) do |c|
+            c.name = data['name']
           end
 
           # 住所取得
@@ -177,6 +177,12 @@ namespace :master_import do
           city = City.find_by(name: data['city'])
 
           # Review
+          calculated_sale_reason = if data['sale_reason_type'].to_i == 99
+                                     data['sale_reason_type'].to_i
+                                   else
+                                     data['sale_reason_type'].to_i - 1
+                                   end
+
           branch.reviews.create({
                                   prefecture_id: prefecture.id,
                                   city_id: city.id,
@@ -201,7 +207,7 @@ namespace :master_import do
                                   price_cs: data['price_cs'],
                                   contract_type: (data['contract_type'].to_i - 1),
                                   title: data['title'],
-                                  sale_reason_type: data['sale_reason_type'].to_i == 99 ? data['sale_reason_type'].to_i : data['sale_reason_type'].to_i - 1,
+                                  sale_reason_type: calculated_sale_reason,
                                   anxiety: data['anxiety'],
                                   decision_reason: data['decision_reason'],
                                   support_cs: data['support_cs'],
