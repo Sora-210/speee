@@ -1,8 +1,16 @@
-<%= tag.meta name: 'robots', content: 'noindex' %>
-<% content_for :title, "査定依頼フォーム" %>
+<head>
+  <%= tag.meta name: 'robots', content: 'noindex' %>
+  <% content_for :title, "査定依頼完了" %>
+</head>
 
-<html>
-    <body>
-        <h1>査定依頼送信が終了しました。<br>査定結果はメールに送信されます。</h1>
-    </body>
-</html>
+<body class="d-flex vh-100 justify-content-center align-items-center">
+  <div class="card w-50">
+    <div class="card-header bg-success text-white">
+      <h3>完了</h3>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">査定依頼送信が終了しました。</h4>
+      <p class="card-text">査定結果はメールに送信されます。</p>
+    </div>
+  </div>
+</body>
