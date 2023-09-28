@@ -16,7 +16,7 @@
                     </ul>
                     </div>
                 <% end %>
-                <%= form_with model: @assessment,url: assessments_path, local: true, html: { class: 'needs-validation', novalidate: '' } do |form| %>
+                <%= form_with model: @assessment, local: true, html: { class: 'needs-validation', novalidate: '' } do |form| %>
                     <%= form.hidden_field :branch_id, value: @branch.id%>
                     <%= form.hidden_field :prefecture_id, value: @branch.prefecture_id%>
                     <%= form.hidden_field :city_id, value: @branch.city_id%>
