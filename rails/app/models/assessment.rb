@@ -25,8 +25,7 @@ class Assessment < ApplicationRecord
       \d{4}|
       0120[-(]?\d{3}[-)]?\d{3}
     )\z
-  }x
-  /
+  /x
   validates :tel, presence: true, format: { with: VALID_TEL_REGEX }
   enum building_type: {
     'apartment_house' => 0,
