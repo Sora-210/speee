@@ -20,7 +20,7 @@ crumb :company do |company|
 end
 
 crumb :branch do |branch|
-  link branch.name, branch_path(branch.id)
+  link branch.name.blank? ? "本店" : branch.name, branch_path(branch.id)
   parent :company, branch.company
 end
 
