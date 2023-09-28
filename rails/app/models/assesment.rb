@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Assesment < ApplicationRecord
+class Assessment < ApplicationRecord
   belongs_to :branch
   belongs_to :prefecture
   belongs_to :city

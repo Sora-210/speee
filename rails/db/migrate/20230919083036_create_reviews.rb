@@ -16,12 +16,12 @@ class CreateReviews < ActiveRecord::Migration[7.0]
       # enum
       t.integer :times_type, null: false
       t.date :consider_season, null: false
-      t.date :assesment_season, null: false
+      t.date :assessment_season, null: false
       t.date :po_season, null: false
       t.date :sale_season, null: false
       t.date :delivery_season, null: false
       t.integer :speed_cs, null: false
-      t.integer :assesment_price, null: false
+      t.integer :assessment_price, null: false
       t.integer :sale_price, null: false
       t.boolean :is_price_down, null: false, default: 0
       t.integer :price_down_month

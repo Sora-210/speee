@@ -69,7 +69,7 @@ def validiate_phone(params)
 end
 
 def build_assessment
-  Assesment.new(
+  Assessment.new(
     city_id: @branch.city_id,
     prefecture_id: @branch.prefecture_id,
     branch_id: @branch.id,
