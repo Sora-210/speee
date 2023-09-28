@@ -30,9 +30,13 @@ RSpec.describe 'Assessments', type: :request do
         end.to change(Assessment, :count).by(1)
       end
 
-      it 'redirects to the thanks page if external API responds with 200' do
+      it 'has the expected http status' do
         post assessments_path, params: { assessment: valid_params }
         expect(response).to have_http_status(:found)
+      end
+
+      it 'redirects to the thanks page' do
+        post assessments_path, params: { assessment: valid_params }
         expect(response).to redirect_to(action: :thanks)
       end
     end
@@ -65,9 +69,13 @@ RSpec.describe 'Assessments', type: :request do
         end.not_to change(Assessment, :count)
       end
 
-      it 'redirects to the thanks page if external API responds with 422' do
+      it 'has the expected http status' do
         post assessments_path, params: { assessment: invalid_params }
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
+      end
+
+      it 'redirects to the error page' do
+        post assessments_path, params: { assessment: invalid_params }
         expect(response).to redirect_to(action: :error)
       end
     end
