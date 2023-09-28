@@ -4,16 +4,10 @@ require 'rails_helper'
 
 RSpec.describe 'Branches' do
   describe '[GET] /branches/1', type: :request do
-    let!(:prefecture) do
+    before do
       create(:prefectures)
-    end
-    let!(:city) do
       create(:cities)
-    end
-    let!(:company) do
       create(:companies)
-    end
-    let!(:branch) do
       create(:branches)
     end
 
