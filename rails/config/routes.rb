@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       get 'thanks'
       get 'error'
     end
-  end 
+  end
   resources :prefectures, only: [:show], param: :name do
     resources :cities, only: [:show], param: :name
   end
