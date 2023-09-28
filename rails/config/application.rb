@@ -20,7 +20,9 @@ module Rail
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.action_controller.default_url_options = { trailing_slash: true }
+
+    # TODO: こいつがPOSTリクエストまで、問答無用でリダイレクトすることによって査定依頼フォームが機能しなくなったので、一旦コメントアウト。
+    # config.action_controller.default_url_options = { trailing_slash: true }
 
     config.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
       r301 %r{^(.+)/$}, '$1'

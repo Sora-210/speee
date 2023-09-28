@@ -74,7 +74,7 @@
 
 </div>
 <div class="d-flex justify-content-center align-items-center mt-5 mb-5">
-  <button class="btn btn-primary  custom-button">査定依頼をする</button>
+  <%= link_to "査定依頼をする", assessments_path(branch_id: @branch.id), class: "btn btn-primary custom-button" %>
   </div>
 
   <style>
@@ -104,7 +104,6 @@
 
   a {
   text-decoration: none !important;
-  color: inherit !important; 
 }
 
 

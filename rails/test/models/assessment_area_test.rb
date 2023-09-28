@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class AssesmentAreaTest < ActiveSupport::TestCase
+class AssessmentAreaTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

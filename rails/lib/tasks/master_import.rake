@@ -82,11 +82,11 @@ namespace :master_import do
 
   desc '企業マスターのインポート'
   task :companies, ['path'] => :environment do |_task, args|
-    puts 'Companies/branches/Assesment_Areas Master Importing...'
+    puts 'Companies/branches/Assessment_Areas Master Importing...'
 
     before_company_count = Company.count
     before_branch_count = Branch.count
-    before_assesment_area_count = AssesmentArea.count
+    before_assessment_area_count = AssessmentArea.count
 
     begin
       csv = Rails.root.join((args.path.presence || 'company.csv'))
@@ -120,10 +120,10 @@ namespace :master_import do
                                              introduction: data['introduction']
                                            })
 
-          # Assesment_Area
-          data['assesment_areas'].split(',').each do |assesment_area_city_id|
-            branch.assesment_areas.create(
-              city_id: assesment_area_city_id
+          # Assessment_Area
+          data['assessment_areas'].split(',').each do |assessment_area_city_id|
+            branch.assessment_areas.create(
+              city_id: assessment_area_city_id
             )
           end
         end
@@ -131,12 +131,12 @@ namespace :master_import do
 
       after_company_count = Company.count
       after_branch_count = Branch.count
-      after_assesment_area_count = AssesmentArea.count
+      after_assessment_area_count = AssessmentArea.count
 
       puts "Company: #{after_company_count - before_company_count}件 挿入しました"
       puts "Branch: #{after_branch_count - before_branch_count}件 挿入しました"
-      puts "AssesmentArea: #{after_assesment_area_count - before_assesment_area_count}件 挿入しました"
-      raise '挿入件数が0件です' if (after_assesment_area_count - before_assesment_area_count).zero?
+      puts "AssessmentArea: #{after_assessment_area_count - before_assessment_area_count}件 挿入しました"
+      raise '挿入件数が0件です' if (after_assessment_area_count - before_assessment_area_count).zero?
     rescue ActiveRecord::RecordNotUnique
       Rails.logger.error '[ERROR]'
       Rails.logger.error 'IDが重複しています'
@@ -193,12 +193,12 @@ namespace :master_import do
                                   building_type: building_type[data['building_type']],
                                   times_type: times_type[data['times']],
                                   consider_season: data['consider_season'],
-                                  assesment_season: data['assesment_season'],
+                                  assessment_season: data['assessment_season'],
                                   po_season: data['po_season'],
                                   sale_season: data['sale_season'],
                                   delivery_season: data['delivery_season'],
                                   speed_cs: data['speed_cs'],
-                                  assesment_price: data['assesment_price'],
+                                  assessment_price: data['assessment_price'],
                                   sale_price: data['sale_price'],
                                   is_price_down: data['is_price_down'],
                                   price_down_month: data['price_down_month'],

@@ -16,7 +16,10 @@
                     </ul>
                     </div>
                 <% end %>
-                <%= form_with url:request.url, model:@assessment,local: true, html: { class: 'needs-validation', novalidate: '' } do |form| %>
+                <%= form_with model: @assessment, local: true, html: { class: 'needs-validation', novalidate: '' } do |form| %>
+                    <%= form.hidden_field :branch_id, value: @branch.id%>
+                    <%= form.hidden_field :prefecture_id, value: @branch.prefecture_id%>
+                    <%= form.hidden_field :city_id, value: @branch.city_id%>
                     <div class="form-group" style="margin-top: 20px;">
                     <%= form.label :last_name, '苗字:' %>
                     <%= form.text_field :last_name, class: 'form-control' %>
@@ -25,15 +28,15 @@
                     </div>
 
                     <div class="form-group" style="margin-top: 20px;">
-                    <%= form.label :last_name_kana, 'カナ:' %>
+                    <%= form.label :last_name_kana, 'セイ:' %>
                     <%= form.text_field :last_name_kana, class: 'form-control' %>
-                    <%= form.label :first_name_kana, 'カナ:' %>
+                    <%= form.label :first_name_kana, 'メイ:' %>
                     <%= form.text_field :first_name_kana, class: 'form-control' %>
                     </div>
 
                     <div class="form-group" style="margin-top: 20px;">
-                    <%= form.label :phone, '電話番号(ハイフンあり):' %>
-                    <%= form.telephone_field :phone, class: 'form-control' %>
+                    <%= form.label :tel, '電話番号(ハイフンあり):' %>
+                    <%= form.telephone_field :tel, class: 'form-control' %>
                     </div>
 
                     <div class="form-group" style="margin-top: 20px;">
@@ -48,7 +51,7 @@
 
                     <div class="form-group" style="margin-top: 20px;">
                     <%= form.label :building_type, '建物のタイプ:' %>
-                    <%= form.select :building_type, Assesment.building_types.map { |key, value| [I18n.t("enums.assessment.building_type.#{key}"), value] }, {}, class: 'form-control' %>
+                    <%= form.select :building_type, Assessment.building_types.map { |key, _value| [I18n.t("enums.assessment.building_type.#{key}"), key] }, {}, class: 'form-control' %>
 
                     </div>
 
@@ -69,12 +72,12 @@
 
                     <div class="form-group" style="margin-top: 20px;">
                     <%= form.label :layout, '間取り:' %>
-                   <%= form.select :room_plan_type, Assesment.room_plan_types.map { |key, value| [I18n.t("enums.assessment.layout.#{key}"), value] }, {}, class: 'form-control' %>
+                   <%= form.select :room_plan_type, Assessment.room_plan_types.map { |key, _value| [I18n.t("enums.assessment.layout.#{key}"), key] }, {}, class: 'form-control' %>
                     </div>
 
                     <div class="form-group" style="margin-top: 20px;">
-                    <%= form.label :age, '築年数:' %>
-                    <%= form.number_field :age, class: 'form-control' %>
+                    <%= form.label :constructed_year, '築年数:' %>
+                    <%= form.number_field :constructed_year, class: 'form-control' %>
                     </div>
 
                     <div style="margin-top: 20px;">
