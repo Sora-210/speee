@@ -6,7 +6,11 @@ require 'uri'
 class AssessmentsController < ApplicationController
   def index
     @assessment = Assessment.new
-    return if params[:branch_id].blank?
+
+    if params[:branch_id].blank?
+      return render template: 'errors/404', status: :not_found, layout: 'error',
+                    content_type: 'text/html'
+    end
 
     @branch = Branch.find(params[:branch_id])
   end
