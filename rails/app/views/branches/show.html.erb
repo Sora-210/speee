@@ -27,15 +27,15 @@
   <tbody>
     <tr>
       <td>対応満足度</td>
-      <td><span class="value-cell"><%=two_decimal_avg(@support_cs_avg)%></span>/5.0</td>
+      <td><span class="value-cell"><%=@branch.speed_average_score%></span>/5.0</td>
     </tr>
     <tr>
       <td>売却スピード</td>
-      <td><span class="value-cell"><%=two_decimal_avg(@speed_cs_avg)%></span>/5.0</td>
+      <td><span class="value-cell"><%=@branch.price_average_score%></span>/5.0</td>
     </tr>
     <tr>
       <td>売却価格</td>
-      <td><span class="value-cell"><%=two_decimal_avg(@price_cs_avg)%></span>/5.0</td>
+      <td><span class="value-cell"><%=@branch.support_average_score%></span>/5.0</td>
     </tr>
   </tbody>
 </table>
@@ -56,7 +56,7 @@
 </div>
 
  </div>
-  <p class="mt-5"><strong><%= @company.name %>で売却したひとの不動産会社についての口コミ（平均評価★<%=two_decimal_avg(@overall_avg)%>)</strong></p>
+  <p class="mt-5"><strong><%= @company.name %>で売却したひとの不動産会社についての口コミ（平均評価★<%=@branch.all_average_score%>)</strong></p>
 
 <% @branch.reviews.each do |review| %>
   <div class="col-8 mb-4">

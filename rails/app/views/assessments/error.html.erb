@@ -1,8 +1,16 @@
-<%= tag.meta name: 'robots', content: 'noindex' %>
-<% content_for :title, "査定依頼フォーム" %>
+<head>
+  <%= tag.meta name: 'robots', content: 'noindex' %>
+  <% content_for :title, "査定依頼フォーム" %>
+</head>
 
-<html>
-    <body>
-        <h1>査定依頼送信に失敗しました。<br>もう一度、査定依頼の送信をお願いいたします。</h1>
-    </body>
-</html>
+<body class="d-flex vh-100 justify-content-center align-items-center">
+  <div class="card w-50">
+    <div class="card-header bg-danger text-white">
+      <h3>エラー</h3>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">査定依頼送信に失敗しました。</h4>
+      <p class="card-text">もう一度、査定依頼の送信をお願いいたします。</p>
+    </div>
+  </div>
+</body>
