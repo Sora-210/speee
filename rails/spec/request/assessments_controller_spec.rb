@@ -2,6 +2,13 @@
 
 RSpec.describe 'Assessments', type: :request do
   describe 'POST /create' do
+    before do
+      create(:prefectures)
+      create(:cities)
+      create(:companies)
+      create(:branches)
+    end
+
     context 'with valid parameters' do
       let(:valid_params) do
         {
