@@ -16,7 +16,7 @@ RSpec.describe 'Assessments' do
     let!(:branch) do
       create(:branches)
     end
-    
+
     it 'returns http success' do
       get assessments_path(branch_id: 1)
       expect(response).to have_http_status(:success)

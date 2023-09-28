@@ -16,7 +16,7 @@ RSpec.describe 'Cities' do
     let!(:branch) do
       create(:branches)
     end
-    
+
     it 'returns http success' do
       get prefecture_city_path('東京都', '港区')
       expect(response).to have_http_status(:success)
