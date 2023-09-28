@@ -31,8 +31,8 @@ RSpec.describe 'Assessments', type: :request do
       end
 
       it 'redirects to the thanks page if external API responds with 200' do
-        allow_any_instance_of(Net::HTTPResponse).to receive(:code).and_return('200')
         post assessments_path, params: { assessment: valid_params }
+        expect(response).to have_http_status(:found)
         expect(response).to redirect_to(action: :thanks)
       end
     end
@@ -66,8 +66,8 @@ RSpec.describe 'Assessments', type: :request do
       end
 
       it 'redirects to the thanks page if external API responds with 422' do
-        allow_any_instance_of(Net::HTTPResponse).to receive(:code).and_return('422')
         post assessments_path, params: { assessment: invalid_params }
+        expect(response).to have_http_status(302)
         expect(response).to redirect_to(action: :error)
       end
     end
