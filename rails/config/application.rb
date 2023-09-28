@@ -24,12 +24,12 @@ module Rail
     # TODO: こいつがPOSTリクエストまで、問答無用でリダイレクトすることによって査定依頼フォームが機能しなくなったので、一旦コメントアウト。
     # config.action_controller.default_url_options = { trailing_slash: true }
 
-    config.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
-      r301 %r{^(.+)/$}, '$1'
-    end
+    # config.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
+    #   r301 %r{^(.+)/$}, '$1'
+    # end
 
     # logger
     config.logger = Logger.new($stdout)
-    config.log_level = :error
+    config.log_level = :debug
   end
 end
