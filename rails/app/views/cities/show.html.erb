@@ -27,6 +27,8 @@
                 <%= image_tag branch.logo_url, class:"card-img-top", alt:"不動産業者のロゴ"%>
                 <div class="card-body">
                   <h2 class="card-title"><%= branch.company.name %></h2>
+                  <h5 class="card-subtitle"><%= branch.name || "" %></h5>
+                  <br>
                   <h3 class="card-subtitle mb-2">★<%=branch.all_average_score()%></h3>
                   <p class="card-text">営業時間：<%= branch.business_hours_text%></p>
                   <p class="card-text">定休日：<%= branch.holidays_text%></p>
