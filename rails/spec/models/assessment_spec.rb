@@ -40,26 +40,55 @@ RSpec.describe Assessment do
       end
     end
 
+    context 'when attributes are nil' do
+      it 'is invalid' do
+        valid_params.each_key do |key|
+          assessment.send("#{key}=", nil)
+        end
+        expect(assessment).not_to be_valid
+      end
+    end
+
     context 'email validations' do
-      it 'is invalid without an email' do
-        assessment.email = nil
+      it 'is valid with a correct email format' do
+        assessment.email = 'test@test.com'
+        expect(assessment).to be_valid
+      end
+
+      it 'is invalid without "@"' do
+        assessment.email = 'a.com'
         expect(assessment).not_to be_valid
       end
 
-      it 'is invalid with a wrong format email' do
-        assessment.email = 'a.com'
+      it 'is invalid without domain name' do
+        assessment.email = '@test.com'
         expect(assessment).not_to be_valid
       end
     end
 
     context 'tel validations' do
-      it 'is invalid without a tel' do
-        assessment.tel = nil
+      it 'is valid with a correct tel format' do
+        assessment.tel = '080-1221-1111'
+        expect(assessment).to be_valid
+      end
+
+      it 'is invalid with a missing area code' do
+        assessment.tel = '08-122-11'
         expect(assessment).not_to be_valid
       end
 
-      it 'is invalid with a wrong format tel' do
-        assessment.tel = '08-122-11'
+      it 'is invalid with too long area code' do
+        assessment.tel = '081-1211-11111'
+        expect(assessment).not_to be_valid
+      end
+
+      it 'is invalid with too long prefix' do
+        assessment.tel = '081-12111-1111'
+        expect(assessment).not_to be_valid
+      end
+
+      it 'is invalid with too short prefix' do
+        assessment.tel = '0811-1211-1111'
         expect(assessment).not_to be_valid
       end
     end
