@@ -51,5 +51,9 @@ RSpec/MultipleExpectations:
 RSpec/ExampleLength:
   Enabled: false
 
+Layout/LineLength:
+  Exclude:
+    - 'app/controllers/prefectures_controller.rb'
+
 RSpec/InstanceVariable:
   Enabled: false

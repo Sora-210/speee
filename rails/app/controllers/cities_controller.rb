@@ -7,7 +7,7 @@ class CitiesController < ApplicationController
     @city = City.find_by(name: params[:name])
     return render template: 'errors/404', status: :not_found, layout: 'error', content_type: 'text/html' if @city.blank?
 
-    @branches = Branch.where(city_id: @city.id)
+    @branches = Branch.joins(:assessment_areas).where(assessment_areas: { city_id: @city.id })
     if @branches.blank?
       return render template: 'errors/404', status: :not_found, layout: 'error',
                     content_type: 'text/html'
