@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Branch, type: :model do
+RSpec.describe Branch do
   describe 'Score Methods' do
     before do
       create(:prefectures)
