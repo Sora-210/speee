@@ -8,7 +8,7 @@ class PrefecturesController < ApplicationController
                     content_type: 'text/html'
     end
 
-    @branches = Branch.where(prefecture_id: @prefecture.id)
+    @branches = Branch.joins(assessment_areas: :city).where(assessment_areas: { cities: { prefecture_id: @prefecture.id } }).distinct
     if @branches.blank?
       return render template: 'errors/404', status: :not_found, layout: 'error',
                     content_type: 'text/html'
