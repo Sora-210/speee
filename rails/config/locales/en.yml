@@ -41,9 +41,9 @@ en:
           assets: "資産整理"
           money: "金銭的な理由"
           other: "その他"
-    error:
-      messages:
-        record_invalid: "エラーが起きています"
+  errors:
+    messages:
+      record_invalid: "バリデーションに失敗しました: %{errors}"
 
   enums:
     assessment:

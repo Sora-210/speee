@@ -10,8 +10,19 @@ ja:
           assets: "資産整理"
           money: "金銭的な理由"
           other: "その他"
-    error:
-      messages: "エラーが起きています"
+      assessment:
+        tel: "電話番号"
+        email: "メールアドレス"
+      errors:
+        models:
+          assessment:
+            attributes:
+              email:
+                invalid: "の形式が不正です。"
+  errors:
+    messages:
+      record_invalid: "バリデーションに失敗しました: %{errors}"
+      invalid: "の形式が違います"
 
   enums:
     assessment:
