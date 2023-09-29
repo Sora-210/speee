@@ -24,6 +24,7 @@ class AssessmentsController < ApplicationController
       @branch = Branch.find(params[:assessment][:branch_id])
       return render 'index'
     end
+    @assessment.save
     response = post_to_external_api_with_net_http(@assessment)
     return redirect_to action: :thanks if response.code == '200'
 
