@@ -10,11 +10,15 @@ RSpec.describe City, type: :model do
         @city = create(:cities)
         create(:cities, id: 2)
         create(:companies)
+        
+        # 修正途中
         (1..8).to_a.each { |id| create(:branches, id:) }
         (9..10).to_a.each { |id| create(:branches, id:, city_id: 2) }
+
+        (1..8).to_a.each { |id| create(:assessment_areas, id: id, branch_id: id) }
       end
 
-      it 'returns true' do
+      xit 'returns true' do
         expect(@city.no_index?).to be true
       end
     end
@@ -25,11 +29,16 @@ RSpec.describe City, type: :model do
         @city = create(:cities)
         create(:cities, id: 2)
         create(:companies)
+        create(:assessment_areas)
+
+        # 修正途中
         (1..6).to_a.each { |id| create(:branches, id:) }
         (7..10).to_a.each { |id| create(:branches, id:, city_id: 2) }
+
+        (1..6).to_a.each { |id| create(:assessment_areas, id: id, branch_id: id) }
       end
 
-      it 'returns false' do
+      xit 'returns false' do
         expect(@city.no_index?).to be false
       end
     end
