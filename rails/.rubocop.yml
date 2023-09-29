@@ -44,3 +44,16 @@ RSpec/NestedGroups:
 
 RSpec/MultipleMemoizedHelpers:
   Max: 20
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+Layout/LineLength:
+  Exclude:
+    - 'app/controllers/prefectures_controller.rb'
+
+RSpec/InstanceVariable:
+  Enabled: false
