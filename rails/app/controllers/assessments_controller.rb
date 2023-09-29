@@ -22,10 +22,11 @@ class AssessmentsController < ApplicationController
     @assessment = Assessment.new(assessment_params)
     unless @assessment.valid?
       @branch = Branch.find(params[:assessment][:branch_id])
-      return render "index" 
+      return render 'index'
     end
     response = post_to_external_api_with_net_http(@assessment)
     return redirect_to action: :thanks if response.code == '200'
+
     redirect_to action: :error
   end
 
