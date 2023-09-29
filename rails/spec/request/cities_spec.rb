@@ -9,6 +9,7 @@ RSpec.describe 'Cities' do
       create(:cities)
       create(:companies)
       create(:branches)
+      create(:assessment_areas)
     end
 
     it 'returns http success' do
