@@ -54,3 +54,6 @@ RSpec/ExampleLength:
 Layout/LineLength:
   Exclude:
     - 'app/controllers/prefectures_controller.rb'
+
+RSpec/InstanceVariable:
+  Enabled: false
