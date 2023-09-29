@@ -1,0 +1,115 @@
+<% breadcrumb :review, @review %>
+<% content_for(:title, "（#{format_japanese_date(@review.created_at)}投稿）口コミ・評判 | #{@review.branch.company.name}#{@review.branch.name}") %>
+<% content_for(:keywords, "不動産会社,#{@review.branch.company.name},#{@review.branch.name.blank? ? "" : "#{@review.branch.name}," }口コミ,評判") %>
+
+  <% branch = @review.branch %>
+  <% company = @review.branch.company %>
+  <% prefecture_name = @review.prefecture.name %>
+  <% city_name = @review.city.name %>
+
+  <h2 class='text-center'><%= @review.title %></h2>
+  <div class="custom-space">
+  <nav aria-label="パンくずリスト">
+    <%= breadcrumbs style: :bootstrap5 %>
+  </nav>
+  <div class=" mt-5">
+  <p class="lh-sm  mb-2">売却した不動産会社名: <%= company.name %></p>
+  <p class="lh-sm  mb-2">住所: <%= prefecture_name %><%= city_name %></p>
+  <p class="lh-sm  mb-2">売却の理由:<%= display_sale_reason(@review.sale_reason_type) %></p>
+  <% case @review.times_type %>
+<% when "first" %>
+  <p class="lh-sm ">売却経験:今回の売却が初めて</p>
+<% when "second" %>
+  <p class="lh-sm ">売却経験:今回の売却が2回目。</p>
+<% when "many" %>
+  <p class="lh-sm ">売却経験:3回以上</p>
+<% end %>
+</div>
+<div class=" mt-5">
+  <%= render 'review_section', title: '売却時に不安だったこと', content: @review.anxiety %>
+  <%= render 'review_section', title: 'この会社に決めた決め手', content: @review.decision_reason %>
+  <%= render 'review_section', title: '不動産会社の対応満足度', content: "★#{@review.support_cs} - #{@review.support_reason}" %>
+  <%= render 'review_section', title: '今後売却する人へのアドバイス', content: @review.advice %>
+  <%= render 'review_section', title: '不動産会社に改善してほしい点', content: @review.request %>
+</div>
+<p class="fw-bold mt-5 mb-4">売却時期と価格について</p>
+
+<div class="table-container">
+    <table class="table table-bordered table-no-vertical-border">
+        <tbody>
+            <tr>
+                <td>売却検討</td>
+                <td class="diagonal-strike"><%= format_japanese_date(@review.consider_season)%></td>
+                <td class="diagonal-strike">-</td>
+            </tr>
+            <tr>
+                <td>査定依頼時期/価格</td>
+                <td><%=format_japanese_date(@review.assessment_season)%></td>
+                <td><%= number_with_delimiter(@review.assessment_price / 10000)%>万円</td>
+            </tr>
+            <tr>
+                <td>売出時期/価格</td>
+                <td><%= format_japanese_date(@review.po_season)%></td>
+                <td><%= number_with_delimiter(@review.assessment_price / 10000)%>万円</td>
+            </tr>
+            <tr>
+                <td>売却時期/価格</td>
+                <td><%= format_japanese_date(@review.sale_season)%></td>
+                <td><%= number_with_delimiter(@review.sale_price / 10000)%>万円</td>
+            </tr>
+            <tr>
+                <td>引き渡し時期</td>
+                <td><%=format_japanese_date(@review.delivery_season)%></td>
+                <td>-</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class=" mt-5">
+  <h5 class=""><%= company.name %>について</h5>
+  <p class="mb-0 ">企業名: <%= company.name %></p>
+  <p class="mb-0 ">郵便番号: <%= @review.branch.post_code %></p>
+  <p class="mb-0 ">住所: <%= prefecture_name %><%= city_name %><%= @review.branch.address %></p>
+  <p class="mb-0 ">電話番号: <%= @review.branch.tel %></p>
+  <p class="mb-0 ">FAX: <%= @review.branch.fax %></p>
+  <p class="mb-0 ">営業時間: <%= @review.branch.business_hours_text %></p>
+  <p class="mb-0 ">定休日: <%= @review.branch.holidays_text %></p>
+</div>
+  </div>
+  <div class="d-flex justify-content-center align-items-center mt-5 mb-5">
+  <%= link_to "査定依頼をする", assessments_path(branch_id: @review.branch.id), class: "btn btn-primary custom-button" %>
+  </div>
+
+  <style>
+     .custom-space {
+    margin: 0px 5%;
+  }
+
+  .table-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .custom-button {
+    font-size: 15px;
+    padding: 10px 34px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .custom-space {
+      margin: 0px 2%;
+    }
+
+    .custom-button {
+      font-size: 12px;
+      padding: 8px 24px;
+    }
+
+    h2.text-center {
+      font-size: 1.3rem;  /* 例として1.5remに調整。必要に応じて値を変更してください。 */
+    }
+  }
+
+</style>

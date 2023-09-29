@@ -1,0 +1,26 @@
+ <head>
+  <%= tag.meta name: 'robots', content: 'noindex' %>
+  <% content_for :title, "ベテランすまい" %>
+</head>
+ 
+ <h1 class="text-center">ベテランすまい</h1>
+
+<div class="container mt-4">
+  <div class="border rounded p-4">
+    <div class="row">
+      <% @prefectures.each do |prefecture| %>
+        <div class="col-6 col-md-3 mb-2">
+          <%= link_to prefecture.name, "/prefectures/#{prefecture.name}", class: "d-block text-center" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+ <style>
+     h1 {
+      font-size: 4rem;
+      margin-top: 80px;
+      margin-bottom: 80px;
+    }
+  </style>
