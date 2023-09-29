@@ -3,14 +3,8 @@
 <% content_for(:description, "#{@prefecture.name}の不動産を売却したいけど、どこに相談したらいいかわからない！そんな方へ、ベテランすまいなら#{@prefecture.name}の不動産会社を口コミや評判を見て選ぶことができます！") %>
 <% content_for(:keywords, "不動産会社,#{@prefecture.name},一覧") %>
 
-
-<nav class="navbar navbar-light ">
-  <div class="container">
-    <h4 class="fw-bold mx-3 navbar-brand">ベテランすまい</h4>
-  </div>
-</nav>
 <div class="container mt-4">
-  <h1><%= @prefecture.name %>の不動産会社</h1>
+  <h2><%= @prefecture.name %>の不動産会社</h2>
   <nav aria-label="パンくずリスト">
     <%= breadcrumbs style: :bootstrap5 %>
   </nav>
@@ -38,14 +32,16 @@
     <% end %>
   </div>
 
-  <div class="border rounded mt-4 p-4">
+  <div class="border rounded mt-4 p-4 mb-4">
     <h2 class="mb-4"><%= @prefecture.name %>の他の地域の不動産会社を見る</h2>
     <div class="row">
       <% @cities.each do |city| %>
-      <%# Todo linkをcity_pathに置き換える %>
-      <div class="col-6 col-md-3 mb-2">
-     <%= link_to city.name, prefecture_city_path(@prefecture.name, city.name), class: "d-block" %>
-      </div>
+        <%if city.branches.present?%>
+        <%# Todo linkをcity_pathに置き換える %>
+        <div class="col-6 col-md-3 mb-2">
+          <%= link_to city.name, prefecture_city_path(@prefecture.name, city.name), class: "d-block" %>
+        </div>
+        <%end%>
       <% end %>
     </div>
   </div>

@@ -78,12 +78,7 @@ RSpec.describe 'Assessments', type: :request do
 
       it 'has the expected http status' do
         post assessments_path, params: { assessment: invalid_params }
-        expect(response).to have_http_status(:found)
-      end
-
-      it 'redirects to the error page' do
-        post assessments_path, params: { assessment: invalid_params }
-        expect(response).to redirect_to(action: :error)
+        expect(response).to have_http_status(:not_found)
       end
     end
   end

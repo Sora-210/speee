@@ -11,7 +11,6 @@ class AssessmentsController < ApplicationController
       return render template: 'errors/404', status: :not_found, layout: 'error',
                     content_type: 'text/html'
     end
-
     @branch = Branch.find(params[:branch_id])
   end
 
@@ -21,8 +20,11 @@ class AssessmentsController < ApplicationController
 
   def create
     @assessment = Assessment.new(assessment_params)
-    return redirect_to action: :error unless @assessment.save
-
+    unless @assessment.valid?
+      @branch = Branch.find(params[:assessment][:branch_id])
+      return render 'index'
+    end
+    @assessment.save
     response = post_to_external_api_with_net_http(@assessment)
     return redirect_to action: :thanks if response.code == '200'
 
